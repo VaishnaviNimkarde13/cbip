@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Button, Menu, MenuItem, Box, Container } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -39,6 +40,8 @@ const Navbar = () => {
             justifyContent: "space-between",
           }}
         >
+
+          
           {/* Logo */}
           <Box>
             <img
@@ -108,23 +111,33 @@ const Navbar = () => {
                   >
                     {item.submenu.map((subItem, i) => (
                       <MenuItem
-                        key={i}
-                        onClick={handleMouseLeave}
-                        sx={{
-                          fontSize: "15px",
-                          padding: "12px 18px",
-                          borderBottom:
-                            i !== item.submenu.length - 1
-                              ? "1px solid rgba(255,255,255,0.15)"
-                              : "none",
-                          "&:hover": {
-                            background: "#3a3a3a",
-                            color: "#c6ff00",
-                          },
-                        }}
-                      >
-                        {subItem}
-                      </MenuItem>
+  key={i}
+  component={subItem === "History" ? Link : subItem === "Activities" ? Link : "li"}
+  to={
+    subItem === "History"
+      ? "/history"
+      : subItem === "Activities"
+      ? "/activities"
+      :subItem === "OfficeBearers"
+      ? "/officebearers"
+      : ""
+  }
+  onClick={handleMouseLeave}
+  sx={{
+    fontSize: "15px",
+    padding: "12px 18px",
+    borderBottom:
+      i !== item.submenu.length - 1
+        ? "1px solid rgba(255,255,255,0.15)"
+        : "none",
+    "&:hover": {
+      background: "#3a3a3a",
+      color: "#c6ff00",
+    },
+  }}
+>
+  {subItem}
+</MenuItem>
                     ))}
                   </Menu>
                 )}
