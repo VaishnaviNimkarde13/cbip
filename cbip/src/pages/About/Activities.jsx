@@ -84,7 +84,7 @@ const Activities = () => {
               <Grid item md={3} key={index}>
                 <Box sx={{ textAlign: "center" }}>
                   
-                  <Box
+                  {/* <Box
                     component="img"
                     src={item.img}
                     alt=""
@@ -93,7 +93,24 @@ const Activities = () => {
                       height: "150px",
                       objectFit: "cover",
                     }}
-                  />
+                  /> */}
+
+                  <Box
+  component="img"
+  src={item.img}
+  alt=""
+  sx={{
+    width: "270px",
+    height: "150px",
+    objectFit: "cover",
+    transition: "transform 0.3s",
+    "&:hover": {
+      transform: "scale(0.9)",
+      animationDuration: ".3s",
+      animationTimingFunction: "ease-in-out",
+    },
+  }}
+/>
 
                   <Typography
                     sx={{
