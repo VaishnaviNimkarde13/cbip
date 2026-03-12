@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Grid, Typography, Container } from "@mui/material";
+import { Box, Typography, Container } from "@mui/material";
 
 import banner from "../../assets/hitachi-energy-transmission-towers-2436x810_64-25.webp";
 
@@ -20,7 +20,7 @@ const useInView = () => {
       ([entry]) => {
         if (entry.isIntersecting) setInView(true);
       },
-      { threshold: 0.15 },
+      { threshold: 0.15 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -28,71 +28,60 @@ const useInView = () => {
   return [ref, inView];
 };
 
-
-
 const PersonCard = ({ img, name, role, subRole, size = "md" }) => {
-  const imgSize = size === "lg" ? "200px" : "100%";
-  const cardWidth = size === "lg" ? "280px" : "100%";
+  const isLg = size === "lg";
 
   return (
     <Box
       sx={{
         background: "#fff",
-        
-        boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
-        mx: "auto",
-        width: cardWidth,
+        boxShadow: "0 2px 12px rgba(0,0,0,0.10)",
+        borderRadius: "6px",
+        width: isLg ? "280px" : "240px",
         overflow: "hidden",
         textAlign: "center",
+        flexShrink: 0,
       }}
     >
-      {/* Image fills full width */}
       <Box
         component="img"
         src={img}
         sx={{
-          width: size === "lg" ? imgSize : "100%",
-          height: size === "lg" ? "200px" : "160px",
+          width: "100%",
+          height: isLg ? "300px" : "240px",
           objectFit: "cover",
           objectPosition: "top",
           display: "block",
-          mx: "auto",
         }}
       />
-
-      {/* Text section below image */}
-      <Box sx={{ p: "10px 8px 12px" }}>
+      <Box sx={{ p: "16px 14px 20px" }}>
         <Typography
           sx={{
             fontWeight: 700,
-            fontSize: "13px",
+            fontSize: isLg ? "17px" : "15px",
             color: "#222",
             lineHeight: 1.3,
+            mb: 0.8,
           }}
         >
           {name}
         </Typography>
-
         <Typography
-          variant="body2"
           sx={{
             color: "#555",
-            fontSize: "12px",
-            mt: 0.5,
-            lineHeight: 1.4,
+            fontSize: isLg ? "14px" : "13px",
+            lineHeight: 1.5,
           }}
         >
           {role}
         </Typography>
-
         {subRole && (
           <Typography
-            variant="body2"
             sx={{
               color: "#777",
-              fontSize: "11px",
-              mt: 0.4,
-              lineHeight: 1.4,
+              fontSize: "12px",
+              mt: 0.5,
+              lineHeight: 1.5,
             }}
           >
             {subRole}
@@ -102,6 +91,7 @@ const PersonCard = ({ img, name, role, subRole, size = "md" }) => {
     </Box>
   );
 };
+
 const OfficeBearers = () => {
   const [titleRef, titleInView] = useInView();
   const [presidentRef, presidentInView] = useInView();
@@ -150,14 +140,16 @@ const OfficeBearers = () => {
       {/* MAIN SECTION */}
       <Box sx={{ py: 8, background: "#f5f5f5" }}>
         <Container maxWidth="lg">
-          {/* TITLE - fadeInDown */}
+
+          {/* TITLE */}
           <Typography
             ref={titleRef}
             align="center"
             sx={{
-              mb: 3,
-              fontWeight: 600,
-              fontSize: "20px",
+              mb: 5,
+              fontWeight: 700,
+              fontSize: "24px",
+              color: "#1a237e",
               opacity: titleInView ? 1 : 0,
               animation: titleInView ? "fadeInDown 0.8s ease both" : "none",
             }}
@@ -165,16 +157,15 @@ const OfficeBearers = () => {
             Office Bearers of Central Board of Irrigation &amp; Power
           </Typography>
 
-          {/* PRESIDENT - fadeIn delay 200ms */}
-          {/* <Box
+          {/* PRESIDENT */}
+          <Box
             ref={presidentRef}
             sx={{
-              textAlign: "center",
-              mb: 6,
+              display: "flex",
+              justifyContent: "center",
+              mb: 8,
               opacity: presidentInView ? 1 : 0,
-              animation: presidentInView
-                ? "fadeIn 0.8s ease 0.2s both"
-                : "none",
+              animation: presidentInView ? "fadeIn 0.8s ease 0.2s both" : "none",
             }}
           >
             <PersonCard
@@ -184,38 +175,17 @@ const OfficeBearers = () => {
               subRole="Chairperson-Central Electricity Authority and Ex-officio Secretary to Govt. of India"
               size="lg"
             />
-          </Box> */}
+          </Box>
 
-
-          <Box
-  ref={presidentRef}
-  sx={{
-    display: "flex",
-    justifyContent: "center",
-    mb: 6,
-    opacity: presidentInView ? 1 : 0,
-    animation: presidentInView ? "fadeIn 0.8s ease 0.2s both" : "none",
-  }}
->
-  <Box sx={{ width: "280px" }}>
-    <PersonCard
-      img={man1}
-      name="Shri Ghanshyam Prasad"
-      role="President"
-      subRole="Chairperson-Central Electricity Authority and Ex-officio Secretary to Govt. of India"
-      size="lg"
-    />
-  </Box>
-</Box>
-
-          {/* VICE PRESIDENTS TITLE - fadeInDown */}
+          {/* VICE PRESIDENTS TITLE */}
           <Typography
             ref={vpTitleRef}
             align="center"
             sx={{
-              mb: 3,
-              fontWeight: 600,
-              fontSize: "20px",
+              mb: 4,
+              fontWeight: 700,
+              fontSize: "24px",
+              color: "#1a237e",
               opacity: vpTitleInView ? 1 : 0,
               animation: vpTitleInView ? "fadeInDown 0.8s ease both" : "none",
             }}
@@ -223,14 +193,15 @@ const OfficeBearers = () => {
             Vice Presidents
           </Typography>
 
-          {/* VICE PRESIDENTS GRID - fadeIn delay 200ms */}
-          <Grid
+          {/* VICE PRESIDENTS GRID */}
+          <Box
             ref={vpGridRef}
-            container
-            spacing={4}
-            justifyContent="center"
             sx={{
-              mb: 6,
+              display: "flex",
+              justifyContent: "center",
+              gap: 3,
+              flexWrap: "wrap",
+              mb: 8,
               opacity: vpGridInView ? 1 : 0,
               animation: vpGridInView ? "fadeIn 0.8s ease 0.2s both" : "none",
             }}
@@ -257,30 +228,24 @@ const OfficeBearers = () => {
                 role: "Managing Director, Jindal Power Limited",
               },
             ].map((person, index) => (
-              // <Grid item xs={6} md={3} key={index}>
-              //   <PersonCard
-              //     img={person.img}
-              //     name={person.name}
-              //     role={person.role}
-              //   />
-              // </Grid>
-
-              <Grid item xs={6} md={3} key={index}>
-  <Box sx={{ display: "flex", justifyContent: "center" }}>
-    <PersonCard img={person.img} name={person.name} role={person.role} />
-  </Box>
-</Grid>
+              <PersonCard
+                key={index}
+                img={person.img}
+                name={person.name}
+                role={person.role}
+              />
             ))}
-          </Grid>
+          </Box>
 
-          {/* SECRETARY & DIRECTORS TITLE - fadeInDown */}
+          {/* SECRETARY & DIRECTORS TITLE */}
           <Typography
             ref={secTitleRef}
             align="center"
             sx={{
-              mb: 3,
-              fontWeight: 600,
-              fontSize: "20px",
+              mb: 4,
+              fontWeight: 700,
+              fontSize: "24px",
+              color: "#1a237e",
               opacity: secTitleInView ? 1 : 0,
               animation: secTitleInView ? "fadeInDown 0.8s ease both" : "none",
             }}
@@ -288,13 +253,14 @@ const OfficeBearers = () => {
             Secretary and Directors
           </Typography>
 
-          {/* SECRETARY & DIRECTORS GRID - fadeIn delay 200ms */}
-          <Grid
+          {/* SECRETARY & DIRECTORS GRID */}
+          <Box
             ref={secGridRef}
-            container
-            spacing={4}
-            justifyContent="center"
             sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 3,
+              flexWrap: "wrap",
               opacity: secGridInView ? 1 : 0,
               animation: secGridInView ? "fadeIn 0.8s ease 0.2s both" : "none",
             }}
@@ -312,15 +278,15 @@ const OfficeBearers = () => {
                 role: "Director - Energy",
               },
             ].map((person, index) => (
-              <Grid item xs={6} md={3} key={index}>
-                <PersonCard
-                  img={person.img}
-                  name={person.name}
-                  role={person.role}
-                />
-              </Grid>
+              <PersonCard
+                key={index}
+                img={person.img}
+                name={person.name}
+                role={person.role}
+              />
             ))}
-          </Grid>
+          </Box>
+
         </Container>
       </Box>
     </>
