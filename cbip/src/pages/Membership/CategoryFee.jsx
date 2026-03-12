@@ -21,8 +21,10 @@ const useInView = () => {
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold: 0.1 }
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.1 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -39,9 +41,9 @@ const objectives = [
   "Executing Projects linked with CSR on behalf of various PSU's.",
 ];
 
-const HERO_IMG =heroimg;
- 
-const BANNER_IMG =img;
+const HERO_IMG = heroimg;
+
+const BANNER_IMG = img;
 
 // CentOS-style star icon as SVG
 const StarIcon = () => (
@@ -86,7 +88,7 @@ export default function CategoryFee() {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <Box
         sx={{
-          height: "300px",
+          height: { xs: "180px", sm: "220px", md: "300px" }, // responsive height
           backgroundImage: `url(${HERO_IMG})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -94,12 +96,30 @@ export default function CategoryFee() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          px: 2,
+          textAlign: "center",
         }}
       >
-        <Box sx={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.52)" }} />
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            background: "rgba(0,0,0,0.52)",
+          }}
+        />
+
         <Typography
-          variant="h2"
-          sx={{ color: "#fff", position: "relative", fontWeight: 700, letterSpacing: 1 }}
+          sx={{
+            color: "#fff",
+            position: "relative",
+            fontWeight: 700,
+            letterSpacing: 1,
+            fontSize: {
+              xs: "28px", // mobile
+              sm: "36px", // small tablet
+              md: "48px", // desktop
+            },
+          }}
         >
           Category and Fee
         </Typography>
@@ -109,7 +129,6 @@ export default function CategoryFee() {
       <Box sx={{ py: 8, background: "#f7f7f7" }}>
         <Container maxWidth="lg">
           <Box ref={sec1Ref}>
-
             {/* "CBIP Membership" heading – fadeInDown */}
             <Box
               sx={{
@@ -138,7 +157,13 @@ export default function CategoryFee() {
                 component="img"
                 src={BANNER_IMG}
                 alt="CBIP Banner"
-                sx={{ width: "100%", maxHeight: 320, objectFit: "cover", display: "block", borderRadius: "4px" }}
+                sx={{
+                  width: "100%",
+                  maxHeight: 320,
+                  objectFit: "cover",
+                  display: "block",
+               
+                }}
               />
             </Box>
 
@@ -146,16 +171,23 @@ export default function CategoryFee() {
             <Box
               sx={{
                 opacity: sec1InView ? 1 : 0,
-                animation: sec1InView ? "fadeInDown 0.8s ease 0.3s both" : "none",
+                animation: sec1InView
+                  ? "fadeInDown 0.8s ease 0.3s both"
+                  : "none",
                 mb: 2,
               }}
             >
               <Typography
                 variant="h6"
-                sx={{ color: "#d9251c", fontWeight: 700, lineHeight: 1.5, textTransform: "uppercase" }}
+                sx={{
+                  color: "#d9251c",
+                  fontWeight: 700,
+                  lineHeight: 1.5,
+                  textTransform: "uppercase",
+                }}
               >
-                Benefits for Becoming Institutional Member Organisation of Central Board of
-                Irrigation &amp; Power
+                Benefits for Becoming Institutional Member Organisation of
+                Central Board of Irrigation &amp; Power
               </Typography>
             </Box>
 
@@ -163,27 +195,31 @@ export default function CategoryFee() {
             <Box
               sx={{
                 opacity: sec1InView ? 1 : 0,
-                animation: sec1InView ? "fadeInLeft 0.8s ease 0.9s both" : "none",
+                animation: sec1InView
+                  ? "fadeInLeft 0.8s ease 0.9s both"
+                  : "none",
                 mb: 4,
               }}
             >
-              <Typography sx={{ color: "#555", lineHeight: 1.9, fontSize: "0.95rem" }}>
-                The Central Board of Irrigation &amp; Power (CBIP) created by Government of India in
-                1927, is a Premier Institution has been rendering dedicated services to professional
-                organizations, engineers and individuals in the country and abroad for the last more
-                than 89 years, resulting in accelerated development in the disciplines of Power,
-                Renewable Energy and Water Resources Sectors in the country and abroad. It is a
-                knowledge bank and exchange for dissemination of technical knowledge &amp; professional
-                experiences to help Indian Engineers/ professionals to update their knowledge and gain
-                practical know-how.
+              <Typography
+                sx={{ color: "#555", lineHeight: 1.9, fontSize: "0.95rem" }}
+              >
+                The Central Board of Irrigation &amp; Power (CBIP) created by
+                Government of India in 1927, is a Premier Institution has been
+                rendering dedicated services to professional organizations,
+                engineers and individuals in the country and abroad for the last
+                more than 89 years, resulting in accelerated development in the
+                disciplines of Power, Renewable Energy and Water Resources
+                Sectors in the country and abroad. It is a knowledge bank and
+                exchange for dissemination of technical knowledge &amp;
+                professional experiences to help Indian Engineers/ professionals
+                to update their knowledge and gain practical know-how.
               </Typography>
             </Box>
-
           </Box>
 
           {/* ── OBJECTIVES ─────────────────────────────────────────────── */}
           <Box ref={sec2Ref}>
-
             {/* "Main objectives" heading – fadeInDown */}
             <Box
               sx={{
@@ -209,7 +245,7 @@ export default function CategoryFee() {
                   sx={{
                     alignItems: "flex-start",
                     py: 0,
-                    
+
                     opacity: sec2InView ? 1 : 0,
                     animation: sec2InView
                       ? `zoomIn 0.5s ease ${0.1 + i * 0.1}s both`
@@ -222,7 +258,12 @@ export default function CategoryFee() {
                   <ListItemText
                     primary={item}
                     primaryTypographyProps={{
-                      sx: { color: "#333333", fontSize: "0.92rem",fontWeight:"bold", lineHeight: 1.8 },
+                      sx: {
+                        color: "#333333",
+                        fontSize: "0.92rem",
+                        fontWeight: "bold",
+                        lineHeight: 1.8,
+                      },
                     }}
                   />
                 </ListItem>
@@ -258,7 +299,6 @@ export default function CategoryFee() {
                 Benefit for Member
               </Button>
             </Box>
-
           </Box>
         </Container>
       </Box>

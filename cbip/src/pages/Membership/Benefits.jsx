@@ -124,7 +124,7 @@ export default function Benefits() {
                   alt="Membership"
                   sx={{ 
                     width: "100%", 
-                    borderRadius: "4px", 
+                   
                     display: "block" 
                   }}
                 />
@@ -140,12 +140,12 @@ export default function Benefits() {
                 }}
               >
                 {/* Body text 1 */}
-                <Typography sx={{ color: "#555", lineHeight: 1.9, mb: 2, fontSize: "0.95rem" }}>
+                <Typography sx={{ color: "#333333", lineHeight: 1.9, mb: 2, fontSize: "0.95rem" }}>
                   Executive committee headed by President CBIP (Present Chairperson, CEA), is the
                   highest body taking all the decision for the CBIP. We have at present 240 members
                   in the executive committee broadly comprises of the following organizations:
                 </Typography>
-                <Typography sx={{ color: "#555", lineHeight: 1.9, mb: 3, fontSize: "0.95rem" }}>
+                <Typography sx={{ color: "#333333", lineHeight: 1.9, mb: 3, fontSize: "0.95rem" }}>
                   CPSUs; PSUs; State Electricity Board; State Power, Generation, Transmission and
                   Distribution Cos. and State Energy &amp; Water Resources departments.
                 </Typography>
@@ -172,7 +172,7 @@ export default function Benefits() {
                     animation: sectionInView ? "fadeInRight 0.8s ease 0.9s both" : "none",
                   }}
                 >
-                  <Typography sx={{ color: "#555", lineHeight: 1.9, fontSize: "0.95rem" }}>
+                  <Typography sx={{ color: "#333333", lineHeight: 1.9, fontSize: "0.95rem" }}>
                     The officers of the rank of Chief Engineer and above or equivalent from the member
                     organizations are the member of General Body of the CBIP. All general body members
                     are being updated about the latest information and Innovations in the Power and Water
@@ -215,7 +215,7 @@ export default function Benefits() {
                 mb: 3,
               }}
             >
-              <Typography sx={{ color: "#555", lineHeight: 1.9, fontSize: "0.95rem" }}>
+              <Typography sx={{ color: "#333333", lineHeight: 1.9, fontSize: "0.95rem" }}>
                 The officers of the rank of Chief Engineer and above or equivalent from the member
                 organizations are the member of General Body of the CBIP. All general body members are
                 being updated about the latest information and Innovations in the Power and Water Resources
@@ -244,7 +244,7 @@ export default function Benefits() {
                   <ListItemText
                     primary={item}
                     primaryTypographyProps={{
-                      sx: { color: "#444", fontSize: "0.92rem", lineHeight: 1.75 },
+                      sx: { color: "#333333", fontSize: "0.92rem", lineHeight: 1.75,fontWeight:"bold" },
                     }}
                   />
                 </ListItem>

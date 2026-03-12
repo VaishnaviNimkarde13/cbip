@@ -28,88 +28,7 @@ const useInView = () => {
   return [ref, inView];
 };
 
-// Reusable Person Card matching screenshot exactly
-// const PersonCard = ({ img, name, role, size = "md" }) => {
-//   const imgSize = size === "lg" ? "180px" : "140px";
-//   return (
-//     <Box sx={{ textAlign: "center" }}>
-//       {/* Outer card box - light grey bg with shadow like screenshot */}
-//       <Box
-//         sx={{
-//           display: "inline-block",
-//           background: "#f0f0f0",
-//           borderRadius: "4px",
-//           p: "8px",
-//           boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
-//           mx: "auto",
-//         }}
-//       >
-//         <Box
-//           component="img"
-//           src={img}
-//           sx={{
-//             width: imgSize,
-//             height: imgSize,
-//             objectFit: "cover",
-//             objectPosition: "top",
-//             display: "block",
-//             borderRadius: "2px",
-//           }}
-//         />
-//       </Box>
 
-//       <Typography sx={{ mt: 1.5, fontWeight: 600, fontSize: "13px" }}>
-//         {name}
-//       </Typography>
-//       <Typography variant="body2" sx={{ color: "#777", fontSize: "12px" }}>
-//         {role}
-//       </Typography>
-//     </Box>
-//   );
-// };
-
-// const PersonCard = ({ img, name, role, subRole, size = "md" }) => {
-//   const imgSize = size === "lg" ? "180px" : "140px";
-//   return (
-//     <Box
-//       sx={{
-//         display: "inline-block",
-//         background: "#f0f0f0",
-//         borderRadius: "4px",
-//         p: "8px",
-//         boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
-//         mx: "auto",
-//         textAlign: "center",
-//       }}
-//     >
-//       <Box
-//         component="img"
-//         src={img}
-//         sx={{
-//           width: imgSize,
-//           height: imgSize,
-//           objectFit: "cover",
-//           objectPosition: "top",
-//           display: "block",
-//           borderRadius: "2px",
-//         }}
-//       />
-
-//       {/* Name & Role INSIDE the box */}
-//       <Typography sx={{ mt: 1, fontWeight: 600, fontSize: "13px" }}>
-//         {name}
-//       </Typography>
-//       <Typography variant="body2" sx={{ color: "#777", fontSize: "12px" }}>
-//         {role}
-//       </Typography>
-//       {subRole && (
-//         <Typography variant="body2" sx={{ color: "#777", fontSize: "11px" }}>
-//           {subRole}
-//         </Typography>
-//       )}
-//     </Box>
-//   );
-// };
 
 const PersonCard = ({ img, name, role, subRole, size = "md" }) => {
   const imgSize = size === "lg" ? "200px" : "100%";
@@ -119,7 +38,7 @@ const PersonCard = ({ img, name, role, subRole, size = "md" }) => {
     <Box
       sx={{
         background: "#fff",
-        borderRadius: "4px",
+        
         boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
         mx: "auto",
         width: cardWidth,
