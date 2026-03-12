@@ -124,17 +124,24 @@ const OfficeBearers = () => {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
+          px: 2,
         }}
       >
         <Box
           sx={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }}
         />
-        <Typography
-          variant="h3"
-          sx={{ color: "#fff", position: "relative", fontWeight: 600 }}
-        >
-          Office Bearers
-        </Typography>
+      <Typography
+     sx={{
+     color: "#fff",
+     position: "relative",
+     fontWeight: 600,
+     textAlign: "center",
+     fontSize: { xs: "1.6rem", sm: "2rem", md: "2.8rem", lg: "3rem" },
+     lineHeight: 1.2,
+  }}
+ >
+  Office Bearers
+</Typography>
       </Box>
 
       {/* MAIN SECTION */}
