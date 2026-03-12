@@ -17,6 +17,8 @@ import CategoryFee from "./pages/Membership/CategoryFee";
 
 import ForthcomingEvents from "./pages/Events/ForthComingEvents";
 
+import Consultancy from "./pages/Consultancy";
+
 import CBIPCOE from "./pages/CBIPCOE";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -44,6 +46,8 @@ return ( <BrowserRouter> <Header /> <Navbar />
     <Route path="/empanelment/hydro" element={<HydroResource />} />
     <Route path="/empanelment/power" element={<PowerResource />} />
     <Route path="/empanelment/water" element={<WaterResource />} />
+
+    <Route path="/consultancy" element={<Consultancy />} />
 
     {/* CBIP-COE Route */}
     <Route path="/cbip-coe" element={<CBIPCOE />} />
