@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -15,34 +16,32 @@ import logo from "../../assets/empanelment-logo.jpg";
 
 // ─── TAB BUTTON ──────────────────────────────────────────────────────────────
 const TabButton = ({ label, active, onClick }) => (
-  <Button
+  <button
     onClick={onClick}
-    variant="outlined"
-    sx={{
-      textTransform: "none",
-      fontWeight: 600,
+    style={{
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "38px",
+      minWidth: "130px",
+      padding: "0 20px",
+      marginRight: "8px",
+      fontWeight: 700,
       fontSize: "14px",
       borderRadius: "4px",
-      px: 2.5,
-      py: 0.8,
-      mr: 1,
-      ...(active
-        ? {
-            backgroundColor: "#fff",
-            color: "#c0392b",
-            border: "2px solid #c0392b",
-            "&:hover": { backgroundColor: "#fdf2f2" },
-          }
-        : {
-            backgroundColor: "#1a5276",
-            color: "#fff",
-            border: "2px solid #1a5276",
-            "&:hover": { backgroundColor: "#154360" },
-          }),
+      cursor: "pointer",
+      boxSizing: "border-box",
+      border: "2px solid",
+      borderColor: active ? "#c0392b" : "#1a5276",
+      background: active ? "#fff" : "#1a5276",
+      color: active ? "#c0392b" : "#fff",
+      transition: "background 0.15s, color 0.15s",
+      outline: "none",
+      whiteSpace: "nowrap",
     }}
   >
     {label}
-  </Button>
+  </button>
 );
 
 // ─── SECTION HEADER ──────────────────────────────────────────────────────────
@@ -301,16 +300,9 @@ const FormContent = ({ tab }) => {
       <Box sx={{ px: "16px", mb: 3 }}>
         <SectionHeader>Choose from the following areas your areas of expertise</SectionHeader>
 
-        {/* Table with borders exactly like the reference */}
         <Box sx={{ border: "1px solid #b0bec5", borderBottom: "none" }}>
           {/* Table Header */}
-          <Box
-            sx={{
-              display: "flex",
-              background: "#d6eaf8",
-              borderBottom: "1px solid #b0bec5",
-            }}
-          >
+          <Box sx={{ display: "flex", background: "#d6eaf8", borderBottom: "1px solid #b0bec5" }}>
             <Box sx={{ width: "60px", flexShrink: 0, borderRight: "1px solid #b0bec5", py: 1, px: 1.5 }}>
               <Typography sx={{ fontWeight: 700, fontSize: "13px" }}>S.No</Typography>
             </Box>
@@ -332,24 +324,9 @@ const FormContent = ({ tab }) => {
                 "&:hover": { background: "#f0f8ff" },
               }}
             >
-              {/* S.No cell */}
-              <Box
-                sx={{
-                  width: "60px",
-                  flexShrink: 0,
-                  borderRight: "1px solid #b0bec5",
-                  py: 1,
-                  px: 1.5,
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  pt: 1.2,
-                }}
-              >
+              <Box sx={{ width: "60px", flexShrink: 0, borderRight: "1px solid #b0bec5", py: 1, px: 1.5, display: "flex", alignItems: "flex-start", justifyContent: "center", pt: 1.2 }}>
                 <Typography sx={{ fontSize: "13px", fontWeight: 500 }}>{i + 1}</Typography>
               </Box>
-
-              {/* Checkbox + Text cell */}
               <Box sx={{ flex: 1, py: 0.8, px: 1.5, display: "flex", alignItems: "flex-start", gap: 1 }}>
                 <Checkbox
                   size="small"
@@ -414,19 +391,29 @@ const FormContent = ({ tab }) => {
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 const HydroResource = () => {
-  const [activeTab, setActiveTab] = useState("hydro");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Derive active tab from current URL path
+  const getActiveTab = () => {
+    if (location.pathname.includes("/water")) return "water";
+    if (location.pathname.includes("/power")) return "power";
+    return "hydro";
+  };
+
+  const activeTab = getActiveTab();
 
   return (
     <Box sx={{ background: "#f5f5f5", minHeight: "100vh", py: 3 }}>
       <Container maxWidth="lg">
         {/* TAB BUTTONS */}
         <Box sx={{ display: "flex", mb: 3, flexWrap: "wrap", gap: 1 }}>
-          <TabButton label="Hydro Power"     active={activeTab === "hydro"}  onClick={() => setActiveTab("hydro")}  />
-          <TabButton label="Water Resources" active={activeTab === "water"}  onClick={() => setActiveTab("water")}  />
-          <TabButton label="Power Sector"    active={activeTab === "power"}  onClick={() => setActiveTab("power")}  />
+          <TabButton label="Hydro Power"     active={activeTab === "hydro"}  onClick={() => navigate("/empanelment/hydro")}  />
+          <TabButton label="Water Resources" active={activeTab === "water"}  onClick={() => navigate("/empanelment/water")} />
+          <TabButton label="Power Sector"    active={activeTab === "power"}  onClick={() => navigate("/empanelment/power")} />
         </Box>
 
-        {/* FORM */}
+        {/* FORM — key forces remount when tab changes */}
         <FormContent key={activeTab} tab={activeTab} />
       </Container>
     </Box>
