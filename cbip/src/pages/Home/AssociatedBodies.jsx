@@ -113,7 +113,7 @@ const AssociatedBodies = () => {
         }}
       >
         {/* Heading */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 3 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 0.75 }}>
           <Box
             sx={{
               background: "#1e2a6e",
@@ -141,18 +141,17 @@ const AssociatedBodies = () => {
           </Typography>
         </Box>
 
-           {/* Underline */}
-                  <Box
-                    sx={{
-                      width: "20%",
-                      height: "5px",
-                      background: "#1e2a6e",
-                      borderRadius: "2px",
-                      mb: 3.5,
-                      ml: "52px",
-                    }}
-                  />
-        
+        {/* Underline */}
+        <Box
+          sx={{
+            width: "20%",
+            height: "5px",
+            background: "#1e2a6e",
+            borderRadius: "2px",
+            mb: 3.5,
+            ml: "52px",
+          }}
+        />
 
         {/* Sliding Container */}
         <Box
