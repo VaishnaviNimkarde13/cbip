@@ -71,6 +71,9 @@ import HomeMain from "./pages/Home/HomeMain";
 import History from "./pages/About/History";
 import Activities from "./pages/About/Activities";
 import OfficeBearers from "./pages/About/OfficeBearers";
+import HydroResource from "./pages/Empanelment/HydroResource";
+import PowerResource from "./pages/Empanelment/PowerResource";
+import WaterResource from "./pages/Empanelment/WaterResource";
 
 import Benefits from "./pages/Membership/Benefits";
 import CategoryFee from "./pages/Membership/CategoryFee";
@@ -99,7 +102,12 @@ function App() {
 
         {/* Events Routes */}
         <Route path="/forthcoming-events" element={<ForthcomingEvents />} />
+                {/* Empanelment Routes */}
+        <Route path="empanelment/hydro" element={<HydroResource />} />
+        <Route path="empanelment/power" element={<PowerResource />} />
+        <Route path="empanelment/water" element={<WaterResource />} />
       </Routes>
+
 
       <Footer />
     </BrowserRouter>
