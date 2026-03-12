@@ -1,67 +1,3 @@
-// import "./App.css";
-// import Header from "./components/Header";
-// import Navbar from "./components/Navbar";
-// import Footer from "./components/Footer";
-
-// <<<<<<< Updated upstream
-// import HomeMain from "./pages/Home/HomeMain";
-// import Slider from "./pages/Home/Slider";
-// import History from "./pages/About/History";
-// import Activities from "./pages/About/Activities";
-// import OfficeBearers from "./pages/About/OfficeBearers";
-
-// import Benefits from "./pages/Membership/Benefits";
-// import CategoryFee from "./pages/Membership/CategoryFee";
-
-// import ForthcomingEvents from "./pages/Events/ForthComingEvents";
-// =======
-
-
-// import HomeMain from "./pages/Home/HomeMain";
-// >>>>>>> Stashed changes
-
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <Header />
-//       <Navbar />
-
-//       <Routes>
-// <<<<<<< Updated upstream
-//         <Route path="/" element={<HomeMain />} />
-
-//         <Route path="/history" element={<History />} />
-//         <Route path="/activities" element={<Activities />} />
-//         <Route path="/office-bearers" element={<OfficeBearers />} />
-
-
-//         <Route path="/benefits" element={<Benefits />} />
-//         <Route path="/category-fee" element={<CategoryFee />} />
-
-
-//         <Route path="/forthcoming-events" element={<ForthcomingEvents />} />
-// =======
-//      <Route path="/" element={
-//       <>    
-//       <HomeMain/>      
-//       </>
-//       } />
-//         {/* <Route path="/about" element={<About />} />
-//         <Route path="/events" element={<Events />} />
-//         <Route path="/membership" element={<Membership />} />  */}
-// >>>>>>> Stashed changes
-//       </Routes>
-
-//       <Footer />
-//     </BrowserRouter>
-//   );
-// }
-
-// export default App;
-
-
 import "./App.css";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -71,6 +7,7 @@ import HomeMain from "./pages/Home/HomeMain";
 import History from "./pages/About/History";
 import Activities from "./pages/About/Activities";
 import OfficeBearers from "./pages/About/OfficeBearers";
+
 import HydroResource from "./pages/Empanelment/HydroResource";
 import PowerResource from "./pages/Empanelment/PowerResource";
 import WaterResource from "./pages/Empanelment/WaterResource";
@@ -80,38 +17,43 @@ import CategoryFee from "./pages/Membership/CategoryFee";
 
 import ForthcomingEvents from "./pages/Events/ForthComingEvents";
 
+import CBIPCOE from "./pages/CBIPCOE";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Navbar />
+return ( <BrowserRouter> <Header /> <Navbar />
 
-      <Routes>
-        <Route path="/" element={<HomeMain />} />
+```
+  <Routes>
+    <Route path="/" element={<HomeMain />} />
 
-        {/* About Routes */}
-        <Route path="/history" element={<History />} />
-        <Route path="/activities" element={<Activities />} />
-        <Route path="/office-bearers" element={<OfficeBearers />} />
+    {/* About Routes */}
+    <Route path="/history" element={<History />} />
+    <Route path="/activities" element={<Activities />} />
+    <Route path="/office-bearers" element={<OfficeBearers />} />
 
-        {/* Membership Routes */}
-        <Route path="/benefits" element={<Benefits />} />
-        <Route path="/category-fee" element={<CategoryFee />} />
+    {/* Membership Routes */}
+    <Route path="/benefits" element={<Benefits />} />
+    <Route path="/category-fee" element={<CategoryFee />} />
 
-        {/* Events Routes */}
-        <Route path="/forthcoming-events" element={<ForthcomingEvents />} />
-                {/* Empanelment Routes */}
-        <Route path="empanelment/hydro" element={<HydroResource />} />
-        <Route path="empanelment/power" element={<PowerResource />} />
-        <Route path="empanelment/water" element={<WaterResource />} />
-      </Routes>
+    {/* Events Routes */}
+    <Route path="/forthcoming-events" element={<ForthcomingEvents />} />
+
+    {/* Empanelment Routes */}
+    <Route path="/empanelment/hydro" element={<HydroResource />} />
+    <Route path="/empanelment/power" element={<PowerResource />} />
+    <Route path="/empanelment/water" element={<WaterResource />} />
+
+    {/* CBIP-COE Route */}
+    <Route path="/cbip-coe" element={<CBIPCOE />} />
+  </Routes>
+
+  <Footer />
+</BrowserRouter>
 
 
-      <Footer />
-    </BrowserRouter>
-  );
+);
 }
 
 export default App;
