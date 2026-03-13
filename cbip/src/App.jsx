@@ -22,6 +22,8 @@ import Consultancy from "./pages/Consultancy";
 
 import CBIPCOE from "./pages/CBIPCOE";
 
+import PhotoGallery_Main from "./pages/Events/PhotoGallery_Main";
+
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -44,6 +46,7 @@ return ( <BrowserRouter> <Header /> <Navbar />
     {/* Events Routes */}
     <Route path="/forthcoming-events" element={<ForthcomingEvents />} />
     <Route path="/past-events" element={<PastEvents />} />
+    <Route path="/photo-gallery" element={<PhotoGallery_Main />} />
 
 
     {/* Empanelment Routes */}
@@ -55,6 +58,8 @@ return ( <BrowserRouter> <Header /> <Navbar />
 
     {/* CBIP-COE Route */}
     <Route path="/cbip-coe" element={<CBIPCOE />} />
+
+
   </Routes>
 
   <Footer />

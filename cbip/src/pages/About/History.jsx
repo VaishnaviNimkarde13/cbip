@@ -5,6 +5,11 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import historyImg1 from "../../assets/hitachi-energy-transmission-towers-2436x810_64-25.webp";
 import historyImg2 from "../../assets/n.jpg";
 
+
+import historypdf1 from "../../assets/pdf/historypdf1.pdf";
+import historypdf2 from "../../assets/pdf/historypdf2.pdf";
+
+
 // Hook to detect when element is in viewport
 const useInView = () => {
   const ref = useRef(null);
@@ -261,7 +266,7 @@ const History = () => {
               >
                 <Button
                   variant="contained"
-                  href="http://cbipsite.cloudbin.in/wp-content/uploads/2025/02/Profile-A4-June-2021.pdf"
+                  href={historypdf1}
                   target="_blank"
                   sx={{
                     background: "#333",
@@ -278,7 +283,7 @@ const History = () => {
 
                 <Button
                   variant="contained"
-                  href="https://cbip.org/CBIP_History_Book.pdf"
+                  href={historypdf2}
                   target="_blank"
                   sx={{
                     background: "#333",

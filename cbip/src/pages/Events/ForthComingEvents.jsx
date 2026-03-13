@@ -82,7 +82,7 @@ const events = [
       "National Conference on Information Bulletin BEST PRACTICES IN O&M OF SUBSTATION EQUIPMENTS INCLUDING POWER TRANSFORMERS AND REACTORS",
     date: "23-24 APRIL 2026",
     venue: "NEW DELHI",
-    pdf:pdf4,
+    pdf: pdf4,
     registrationLink: null,
   },
   {
@@ -103,7 +103,7 @@ const events = [
     pdf: pdf6,
     registrationLink: null,
     hasMultipleActions: true,
-    prices:pdf7,
+    prices: pdf7,
     registrationForm: pdf8,
   },
 ];
@@ -118,6 +118,8 @@ const btnBase = {
   py: 0.6,
   minWidth: "auto",
 };
+
+
 
 // ── Single list-row card ──────────────────────────────────────────────────────
 const EventRow = ({ event, index, inView }) => (
@@ -152,7 +154,6 @@ const EventRow = ({ event, index, inView }) => (
           alignItems: "center",
           justifyContent: "center",
           bgcolor: "#f8f9fa", // Light background for images
-        
         }}
       >
         <Box
@@ -205,11 +206,14 @@ const EventRow = ({ event, index, inView }) => (
             mb: 2, // Increased margin bottom
           }}
         >
-          <strong>Date:</strong> {event.date} · <strong>Venue:</strong> {event.venue}
+          <strong>Date:</strong> {event.date} · <strong>Venue:</strong>{" "}
+          {event.venue}
         </Typography>
 
         {/* Action Buttons */}
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5 }}> {/* Increased gap */}
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5 }}>
+          {" "}
+          {/* Increased gap */}
           {/* Brochure */}
           <Button
             variant="contained"
@@ -229,30 +233,30 @@ const EventRow = ({ event, index, inView }) => (
           >
             Download Brochure
           </Button>
-
           {/* Register & Pay */}
           {event.registrationLink && (
             <Button
               variant="outlined"
-              href={event.registrationLink}
+              component="a"
+              href="https://pgpay.icicibank.com/pg/portal/pay/initiatePayOrder?merchantID=100000000385258"
               target="_blank"
+              rel="noopener noreferrer"
               startIcon={<PaymentIcon sx={{ fontSize: "15px !important" }} />}
               size="small"
               sx={{
                 ...btnBase,
                 color: "#1a3a8f",
                 borderColor: "#1a3a8f",
-                fontSize: "0.8rem", // Slightly larger font
+                fontSize: "0.8rem",
                 "&:hover": {
                   background: "rgba(26,58,143,0.05)",
                   borderColor: "#142d72",
                 },
               }}
             >
-              Register &amp; Pay
+              Register & Pay
             </Button>
           )}
-
           {/* WETEX extras */}
           {event.hasMultipleActions && (
             <>
@@ -295,8 +299,8 @@ const EventRow = ({ event, index, inView }) => (
         </Box>
       </Box>
     </Box>
-
-    <Divider sx={{ borderColor: "#e0e0e0", borderBottomWidth: 5 }} /> {/* Thicker divider */}
+    <Divider sx={{ borderColor: "#e0e0e0", borderBottomWidth: 5 }} />{" "}
+    {/* Thicker divider */}
   </Box>
 );
 
@@ -352,8 +356,12 @@ export default function ForthcomingEvents() {
       </Box>
 
       {/* ── LIST ── */}
-      <Box sx={{ py: { xs: 5, md: 7 }, background: "#f7f7f7" }}> {/* Increased vertical padding */}
-        <Container maxWidth="lg"> {/* Changed from "md" to "lg" for wider container */}
+      <Box sx={{ py: { xs: 5, md: 7 }, background: "#f7f7f7" }}>
+        {" "}
+        {/* Increased vertical padding */}
+        <Container maxWidth="lg">
+          {" "}
+          {/* Changed from "md" to "lg" for wider container */}
           {/* Section heading */}
           <Typography
             variant="h6"
@@ -368,14 +376,13 @@ export default function ForthcomingEvents() {
           >
             Upcoming Events &amp; Training Programs
           </Typography>
-
           {/* List container with margin bottom for spacing from footer */}
           <Box
             ref={listRef}
             sx={{
               bgcolor: "#fff",
               border: "1px solid #e0e0e0",
-            
+
               overflow: "hidden",
               boxShadow: "0 4px 20px rgba(0,0,0,0.05)", // Add subtle shadow
               mb: 4, // Added margin bottom to separate from footer
@@ -386,7 +393,6 @@ export default function ForthcomingEvents() {
               <EventRow key={i} event={event} index={i} inView={listInView} />
             ))}
           </Box>
-          
           {/* Extra spacing at bottom */}
           <Box sx={{ height: { xs: 2, md: 4 } }} />
         </Container>
