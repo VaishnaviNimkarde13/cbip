@@ -13,20 +13,22 @@ import icon8 from "../../assets/AB8.png";
 import icon9 from "../../assets/AB9.png";
 import icon10 from "../../assets/AB10.png";
 import icon11 from "../../assets/AB11.png";
+import icon12 from "../../assets/AB12.png";
 
 // Dummy links for each icon
 const iconLinks = [
-  "https://example.com/1",
-  "https://example.com/2",
-  "https://example.com/3",
-  "https://example.com/4",
-  "https://example.com/5",
-  "https://example.com/6",
-  "https://example.com/7",
+  "https://www.cigreindia.org/",
+  "https://tai.org.in/",
+  "https://incold.co.in/",
+  "https://nhai.gov.in/",
+  "https://cbip.org/iash/iash.html",
+  "https://spe-india.org/",
+  "https://www.iwra.org/",
   "https://example.com/8",
-  "https://example.com/9",
-  "https://example.com/10",
-  "https://example.com/11",
+  "https://geosyntheticsindia.org/",
+  "https://cbip.org/cired/cired.html",
+  "https://www.cbip.org/ISRM-2022/index.html",
+  "https://cbip.org/aaro/aaro.html"
 ];
 
 const icons = [
@@ -41,6 +43,7 @@ const icons = [
   { src: icon9, alt: "Icon 9", link: iconLinks[8] },
   { src: icon10, alt: "Icon 10", link: iconLinks[9] },
   { src: icon11, alt: "Icon 11", link: iconLinks[10] },
+  { src: icon12, alt: "Icon 12", link: iconLinks[11] },
 ];
 
 const MegaphoneIcon = () => (
@@ -113,7 +116,7 @@ const AssociatedBodies = () => {
         }}
       >
         {/* Heading */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 0.75 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 3 }}>
           <Box
             sx={{
               background: "#1e2a6e",

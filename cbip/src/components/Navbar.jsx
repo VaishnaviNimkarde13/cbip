@@ -606,7 +606,7 @@ const Navbar = () => {
       label: "EVENT", 
       submenu: [
         { label: "Forthcoming Event", path: "/forthcoming-events" },
-        { label: "Past Events", path: "/past" },
+        { label: "Past Events", path: "/past-events" },
         { label: "Photo Gallery", path: "/photo-gallery" }
       ] 
     },

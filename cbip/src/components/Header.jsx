@@ -5,6 +5,7 @@ import {
   useTheme,
   useMediaQuery,
   IconButton,
+  Stack,
 } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
@@ -15,63 +16,61 @@ import XIcon from "@mui/icons-material/X";
 
 const Header = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box sx={styles.header}>
-      <Container
-        maxWidth={false}
-        sx={{
-          maxWidth: '1400px !important',
-          margin: '0 auto !important',
-          px: { xs: 2, sm: 3 },
-        }}
-      >
-        <Box sx={{
-          display: "flex",
-          flexDirection: { xs: 'column', sm: 'row' },
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: { xs: 1.5, sm: 2 },
-          py: { xs: 1.5, sm: 1 },
-          height:"40px",
-          margin:"0 60px"
-        }}>
-          {/* Left Side - Contact Info */}
-          <Box sx={{
+      <Container maxWidth="lg">
+        <Box
+          sx={{
             display: "flex",
-            flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: { xs: 'flex-start', sm: 'center' },
-            gap: { xs: 1, sm: 3 },
-            width: { xs: '100%', sm: 'auto' },
-          }}>
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+            alignItems: { xs: "flex-start", md: "center" },
+            gap: { xs: 2, md: 1 },
+            py: 1,
+          }}
+        >
+          {/* Contact Info */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 1, sm: 3 }}
+            alignItems={{ xs: "flex-start", sm: "center" }}
+            width={{ xs: "100%", md: "auto" }}
+          >
             <Box sx={styles.contactItem}>
               <PhoneIcon sx={styles.icon} />
-              <span>91-11-2611 6347</span>
+              <span>+91-11-2611 6347</span>
             </Box>
 
             <Box sx={styles.contactItem}>
               <EmailIcon sx={styles.icon} />
-              <span>Cbip@cbip.org</span>
+              <a
+                href="mailto:cbip@cbip.org"
+                style={{
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                cbip@cbip.org
+              </a>
             </Box>
-          </Box>
+          </Stack>
 
-          {/* Right Side - Buttons and Social */}
-          <Box sx={{
-            display: "flex",
-            flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: "center",
-            gap: { xs: 1.5, sm: 2 },
-            width: { xs: '100%', sm: 'auto' },
-          }}>
-            {/* Login Buttons */}
-            <Box sx={{
-              display: "flex",
-              gap: 1.5,
-              width: { xs: '100%', sm: 'auto' },
-              justifyContent: { xs: 'center', sm: 'flex-end' },
-            }}>
+          {/* Right Section */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            alignItems="center"
+            width={{ xs: "100%", md: "auto" }}
+          >
+            {/* Buttons */}
+            <Stack
+              direction="row"
+              spacing={1.5}
+              flexWrap="wrap"
+              justifyContent={{ xs: "flex-start", sm: "center" }}
+            >
               <Box
                 component="a"
                 href="https://www.cbippublication.org/"
@@ -91,53 +90,47 @@ const Header = () => {
               >
                 Publication Login
               </Box>
-            </Box>
+            </Stack>
 
-            {/* Social Icons - Only show on tablet and up, or in a row on mobile */}
-            <Box sx={{
-              display: "flex",
-              gap: 1,
-              justifyContent: { xs: 'center', sm: 'flex-end' },
-              width: { xs: '100%', sm: 'auto' },
-            }}>
+            {/* Social Icons */}
+            <Stack direction="row" spacing={1}>
               <IconButton
-                component="a"
-                target="_blank"
                 href="https://twitter.com"
+                target="_blank"
                 sx={styles.socialIcon}
                 size="small"
               >
-                <XIcon sx={{ fontSize: 18 }} />
+                <XIcon fontSize="small" />
               </IconButton>
+
               <IconButton
-                component="a"
-                target="_blank"
                 href="https://linkedin.com"
+                target="_blank"
                 sx={styles.socialIcon}
                 size="small"
               >
-                <LinkedInIcon sx={{ fontSize: 18 }} />
+                <LinkedInIcon fontSize="small" />
               </IconButton>
+
               <IconButton
-                component="a"
-                target="_blank"
                 href="https://facebook.com"
-                sx={styles.socialIcon}
-                size="small"
-              >
-                <FacebookIcon sx={{ fontSize: 18 }} />
-              </IconButton>
-              <IconButton
-                component="a"
                 target="_blank"
-                href="https://instagram.com"
                 sx={styles.socialIcon}
                 size="small"
               >
-                <InstagramIcon sx={{ fontSize: 18 }} />
+                <FacebookIcon fontSize="small" />
               </IconButton>
-            </Box>
-          </Box>
+
+              <IconButton
+                href="https://instagram.com"
+                target="_blank"
+                sx={styles.socialIcon}
+                size="small"
+              >
+                <InstagramIcon fontSize="small" />
+              </IconButton>
+            </Stack>
+          </Stack>
         </Box>
       </Container>
     </Box>
@@ -157,40 +150,32 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "6px",
-    fontSize: { xs: "16px", sm: "17px" },
-    whiteSpace: "nowrap",
+    fontSize: { xs: "14px", sm: "15px" },
   },
 
   icon: {
     fontSize: { xs: "16px", sm: "18px" },
-    color: "#ffffff",
   },
 
   button: {
-    background: "#ffffff",
-    color: "#333333",
-    padding: { xs: "4px 10px", sm: "6px 14px" },
+    background: "#fff",
+    color: "#333",
+    padding: { xs: "5px 12px", sm: "6px 14px" },
     textDecoration: "none",
-    borderRadius: "3px",
-    fontSize: { xs: "12px", sm: "16px" },
+    borderRadius: "4px",
+    fontSize: { xs: "12px", sm: "13px" },
     fontWeight: 600,
-    cursor: "pointer",
-    display: "inline-block",
-    textAlign: "center",
-    whiteSpace: "nowrap",
-    '&:hover': {
-      background: "#f0f0f0",
+    "&:hover": {
+      background: "#f1f1f1",
     },
   },
 
   socialIcon: {
-    width: { xs: "28px", sm: "30px" },
-    height: { xs: "28px", sm: "30px" },
     border: "1px solid white",
     borderRadius: "4px",
     color: "white",
-    padding: "4px",
-   
+    width: 30,
+    height: 30,
   },
 };
 

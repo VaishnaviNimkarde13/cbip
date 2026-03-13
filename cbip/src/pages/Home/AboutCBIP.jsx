@@ -2,7 +2,26 @@ import React from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import img from "../../assets/AKD.jpg";
 
+import { useNavigate } from "react-router-dom";
+
 const AboutCBIP = () => {
+  const navigate = useNavigate();
+
+  const youtubeLink = "https://www.youtube.com/watch?v=2yTqnRqmX_I";
+
+  const handleOpenYouTube = () => {
+    window.open(youtubeLink, "_blank", "noopener,noreferrer");
+  };
+
+  const handleLearnMore = () => {
+    navigate("/history"); // or whatever your history page route is
+
+    // Scroll to top
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
   return (
     <Box sx={{ width: "100%", py: { xs: 4, md: 6 } }}>
       <Container
@@ -51,7 +70,8 @@ const AboutCBIP = () => {
                   display: "block",
                 }}
                 onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/170x210?text=Photo";
+                  e.target.src =
+                    "https://via.placeholder.com/170x210?text=Photo";
                 }}
               />
             </Box>
@@ -142,12 +162,14 @@ const AboutCBIP = () => {
                 mb: 2,
               }}
             >
-              Central Board of Irrigation and Power, is a Premier Institution set up by the Government
-              of India in the 1927. CBIP has been rendering dedicated services to the professional
-              organization, engineers and individuals in the country related to Power, Water Resources
-              and Renewable Energy Sectors for the last 97 years. CBIP has grown into an eminent
-              organization of international importance while serving the nation equally with great
-              distinction. CBIP is Indian chapter for 10 international organizations related to Power
+              Central Board of Irrigation and Power, is a Premier Institution
+              set up by the Government of India in the 1927. CBIP has been
+              rendering dedicated services to the professional organization,
+              engineers and individuals in the country related to Power, Water
+              Resources and Renewable Energy Sectors for the last 97 years. CBIP
+              has grown into an eminent organization of international importance
+              while serving the nation equally with great distinction. CBIP is
+              Indian chapter for 10 international organizations related to Power
               &amp; Water resources sectors.
             </Typography>
 
@@ -160,9 +182,9 @@ const AboutCBIP = () => {
                 mb: 2,
               }}
             >
-              Today, Central Board of Irrigation and Power presents a shining example of a pioneer
-              organization and has enabled Indian industry to set higher benchmarks and attain
-              international …
+              Today, Central Board of Irrigation and Power presents a shining
+              example of a pioneer organization and has enabled Indian industry
+              to set higher benchmarks and attain international …
             </Typography>
 
             {/* Buttons */}
@@ -176,6 +198,7 @@ const AboutCBIP = () => {
               }}
             >
               <Button
+                onClick={handleLearnMore}
                 sx={{
                   background: "#2d2d2d",
                   color: "#fff",
@@ -197,7 +220,9 @@ const AboutCBIP = () => {
               >
                 Learn More &nbsp;&#10140;
               </Button>
+
               <Button
+                onClick={handleOpenYouTube}
                 sx={{
                   background: "#2d2d2d",
                   color: "#fff",
@@ -217,7 +242,7 @@ const AboutCBIP = () => {
                   },
                 }}
               >
-                Documentry &nbsp;&#10140;
+                Documentary &nbsp;&#10140;
               </Button>
             </Box>
           </Box>

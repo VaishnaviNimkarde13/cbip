@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Typography, IconButton, useTheme, useMediaQuery } from "@mui/material";
+import { Box, Container, Typography, IconButton, useTheme, useMediaQuery, Link } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PrintIcon from "@mui/icons-material/Print";
@@ -11,6 +11,14 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Social media links
+  const socialLinks = [
+    { icon: XIcon, url: "https://twitter.com/cbipofficial", label: "Twitter" },
+    { icon: LinkedInIcon, url: "https://www.linkedin.com/company/cbip", label: "LinkedIn" },
+    { icon: YouTubeIcon, url: "https://www.youtube.com/@cbipofficial", label: "YouTube" },
+    { icon: InstagramIcon, url: "https://www.instagram.com/cbip_official", label: "Instagram" },
+  ];
 
   return (
     <Box
@@ -79,9 +87,14 @@ const Footer = () => {
             </Typography>
 
             <Box sx={{ display: 'flex', gap: 1.5 }}>
-              {[XIcon, LinkedInIcon, YouTubeIcon, InstagramIcon].map((Icon, index) => (
+              {socialLinks.map((social, index) => (
                 <IconButton
                   key={index}
+                  component="a"
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
                   sx={{
                     border: '1px solid white',
                     borderRadius: '4px',
@@ -92,7 +105,7 @@ const Footer = () => {
                     },
                   }}
                 >
-                  <Icon fontSize="small" />
+                  <social.icon fontSize="small" />
                 </IconButton>
               ))}
             </Box>
@@ -136,12 +149,32 @@ const Footer = () => {
             >
               <MailOutlineIcon sx={{ fontSize: 25, mt: 0.3, flexShrink: 0 }} />
               <Box>
-                <Typography sx={{ lineHeight: 1.6, fontSize: '16px' }}>
+                <Link
+                  href="mailto:cbip@cbip.org"
+                  sx={{
+                    color: 'white',
+                    textDecoration: 'none',
+                    display: 'block',
+                    lineHeight: 1.6,
+                    fontSize: '16px',
+                   
+                  }}
+                >
                   cbip@cbip.org
-                </Typography>
-                <Typography sx={{ lineHeight: 1.6, fontSize: '16px' }}>
+                </Link>
+                <Link
+                  href="mailto:cbip.cbip@gmail.com"
+                  sx={{
+                    color: 'white',
+                    textDecoration: 'none',
+                    display: 'block',
+                    lineHeight: 1.6,
+                    fontSize: '16px',
+                   
+                  }}
+                >
                   cbip.cbip@gmail.com
-                </Typography>
+                </Link>
               </Box>
             </Box>
 
@@ -181,7 +214,6 @@ const Footer = () => {
                 width: '100%',
                 height: 200,
                 border: 'none',
-              
               }}
             />
           </Box>

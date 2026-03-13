@@ -16,10 +16,12 @@ import Benefits from "./pages/Membership/Benefits";
 import CategoryFee from "./pages/Membership/CategoryFee";
 
 import ForthcomingEvents from "./pages/Events/ForthComingEvents";
+import PastEvents from "./pages/Events/PastEvents";
 
 import Consultancy from "./pages/Consultancy";
 
 import CBIPCOE from "./pages/CBIPCOE";
+
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -41,6 +43,8 @@ return ( <BrowserRouter> <Header /> <Navbar />
 
     {/* Events Routes */}
     <Route path="/forthcoming-events" element={<ForthcomingEvents />} />
+    <Route path="/past-events" element={<PastEvents />} />
+
 
     {/* Empanelment Routes */}
     <Route path="/empanelment/hydro" element={<HydroResource />} />
