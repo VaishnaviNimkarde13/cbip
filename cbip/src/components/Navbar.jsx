@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Added useEffect
 import {
   Button,
   Menu,
@@ -22,9 +22,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Added useLocation
 
-import pdf from "../assets/pdf/ExecutiveCommittee.pdf"; // ✅ PDF import
+import pdf from "../assets/pdf/ExecutiveCommittee.pdf";
 
 import logo from "../assets/logo.png";
 
@@ -33,9 +33,29 @@ const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileOpenMenus, setMobileOpenMenus] = useState({});
+  
+  // Get current location for active state
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // Auto-open mobile menu if current path matches any submenu
+  useEffect(() => {
+    const newOpenMenus = {};
+    menuItems.forEach((item, index) => {
+      if (item.submenu) {
+        const hasActiveSubmenu = item.submenu.some(
+          subItem => !subItem.isPdf && subItem.path === currentPath
+        );
+        if (hasActiveSubmenu) {
+          newOpenMenus[index] = true;
+        }
+      }
+    });
+    setMobileOpenMenus(newOpenMenus);
+  }, [currentPath]);
 
   const handleMouseEnter = (event, index) => {
     setAnchorEl(event.currentTarget);
@@ -47,15 +67,33 @@ const Navbar = () => {
     setActiveIndex(null);
   };
 
-  const toggleDrawer = (open) => (event) => {
-    setDrawerOpen(open);
-  };
+  // const toggleDrawer = (open) => (event) => {
+  //   setDrawerOpen(open);
+  // };
 
+
+  const toggleDrawer = (open) => (event) => {
+  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    return;
+  }
+  setDrawerOpen(open);
+};
   const toggleMobileMenu = (index) => {
     setMobileOpenMenus((prev) => ({
       ...prev,
       [index]: !prev[index],
     }));
+  };
+
+  // Check if a menu item is active
+  const isActive = (path, isPdf) => {
+    if (isPdf) return false; // PDF links don't have active state
+    return path === currentPath;
+  };
+
+  // Check if any submenu item is active
+  const isSubmenuActive = (submenu) => {
+    return submenu?.some(item => !item.isPdf && item.path === currentPath);
   };
 
   const menuItems = [
@@ -67,8 +105,8 @@ const Navbar = () => {
         { label: "Activities", path: "/activities" },
         { 
           label: "Executive Committee", 
-          path: pdf, // ✅ Direct PDF path (imported PDF)
-          isPdf: true // ✅ Flag to identify it's a PDF
+          path: pdf,
+          isPdf: true
         },
         { label: "Office Bearers", path: "/office-bearers" },
       ],
@@ -107,14 +145,12 @@ const Navbar = () => {
     { label: "CBIP-COE", path: "/cbip-coe" },
   ];
 
-  // Handle click for menu items (for mobile)
   const handleMenuItemClick = (item) => {
     if (item.isPdf) {
-      // ✅ PDF ke liye new tab open karo
       window.open(item.path, '_blank', 'noopener,noreferrer');
     } else if (item.path) {
-      // Normal page ke liye navigation
-      window.location.href = item.path;
+      // Use Link component for navigation, but we need to close drawer
+      // The actual navigation will be handled by Link
     }
     setDrawerOpen(false);
   };
@@ -155,85 +191,101 @@ const Navbar = () => {
 
       {/* Navigation Items */}
       <List sx={{ px: 2 }}>
-        {menuItems.map((item, index) => (
-          <Box key={index}>
-            <ListItem disablePadding sx={{ mb: 0.5 }}>
-              <ListItemButton
-                onClick={() => {
-                  if (item.submenu) {
-                    toggleMobileMenu(index);
-                  } else {
-                    handleMenuItemClick(item); // ✅ Updated click handler
-                  }
-                }}
-                sx={{
-                  borderRadius: "4px",
-                  py: 1,
-                  px: 2,
-                  "&:hover": {
-                    bgcolor: "#f0f0f0",
-                  },
-                }}
-              >
-                <ListItemText
-                  primary={item.label}
-                  primaryTypographyProps={{
-                    sx: {
-                      fontWeight: 600,
-                      color: "#333",
-                      fontSize: "16px",
-                      fontFamily:
-                        "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        {menuItems.map((item, index) => {
+          const hasActiveSubmenu = isSubmenuActive(item.submenu);
+          const isItemActive = !item.submenu && isActive(item.path, item.isPdf);
+          
+          return (
+            <Box key={index}>
+              <ListItem disablePadding sx={{ mb: 0.5 }}>
+                <ListItemButton
+                  component={!item.submenu && !item.isPdf ? Link : 'div'}
+                  to={!item.submenu && !item.isPdf ? item.path : undefined}
+                  onClick={() => {
+                    if (item.submenu) {
+                      toggleMobileMenu(index);
+                    } else {
+                      handleMenuItemClick(item);
+                    }
+                  }}
+                  sx={{
+                    borderRadius: "4px",
+                    py: 1,
+                    px: 2,
+                    backgroundColor: isItemActive || hasActiveSubmenu ? '#3a3a3a' : 'transparent',
+                    color: isItemActive || hasActiveSubmenu ? '#c6ff00' : '#333',
+                    "&:hover": {
+                      bgcolor: isItemActive || hasActiveSubmenu ? '#3a3a3a' : '#f0f0f0',
                     },
                   }}
-                />
-                {item.submenu &&
-                  (mobileOpenMenus[index] ? (
-                    <ExpandLess sx={{ color: "#666", fontSize: "20px" }} />
-                  ) : (
-                    <ExpandMore sx={{ color: "#666", fontSize: "20px" }} />
-                  ))}
-              </ListItemButton>
-            </ListItem>
+                >
+                  <ListItemText
+                    primary={item.label}
+                    primaryTypographyProps={{
+                      sx: {
+                        fontWeight: 600,
+                        fontSize: "16px",
+                        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                      },
+                    }}
+                  />
+                  {item.submenu &&
+                    (mobileOpenMenus[index] ? (
+                      <ExpandLess sx={{ color: "#666", fontSize: "20px" }} />
+                    ) : (
+                      <ExpandMore sx={{ color: "#666", fontSize: "20px" }} />
+                    ))}
+                </ListItemButton>
+              </ListItem>
 
-            {item.submenu && (
-              <Collapse
-                in={mobileOpenMenus[index]}
-                timeout="auto"
-                unmountOnExit
-              >
-                <List component="div" disablePadding sx={{ pl: 2 }}>
-                  {item.submenu.map((subItem, i) => (
-                    <ListItemButton
-                      key={i}
-                      onClick={() => handleMenuItemClick(subItem)} // ✅ Updated for PDF
-                      sx={{
-                        pl: 3,
-                        py: 0.75,
-                        borderRadius: "4px",
-                        "&:hover": {
-                          bgcolor: "#f0f0f0",
-                        },
-                      }}
-                    >
-                      <ListItemText
-                        primary={subItem.label}
-                        primaryTypographyProps={{
-                          sx: {
-                            fontSize: "15px",
-                            color: "#555",
-                            fontFamily:
-                              "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-                          },
-                        }}
-                      />
-                    </ListItemButton>
-                  ))}
-                </List>
-              </Collapse>
-            )}
-          </Box>
-        ))}
+              {item.submenu && (
+                <Collapse
+                  in={mobileOpenMenus[index]}
+                  timeout="auto"
+                  unmountOnExit
+                >
+                  <List component="div" disablePadding sx={{ pl: 2 }}>
+                    {item.submenu.map((subItem, i) => {
+                      const isSubItemActive = isActive(subItem.path, subItem.isPdf);
+                      
+                      return (
+                        <ListItemButton
+                          key={i}
+                          component={!subItem.isPdf ? Link : 'a'}
+                          to={!subItem.isPdf ? subItem.path : undefined}
+                          href={subItem.isPdf ? subItem.path : undefined}
+                          target={subItem.isPdf ? "_blank" : undefined}
+                          rel={subItem.isPdf ? "noopener noreferrer" : undefined}
+                          onClick={() => setDrawerOpen(false)}
+                          sx={{
+                            pl: 3,
+                            py: 0.75,
+                            borderRadius: "4px",
+                            backgroundColor: isSubItemActive ? '#3a3a3a' : 'transparent',
+                            color: isSubItemActive ? '#c6ff00' : '#555',
+                            "&:hover": {
+                              bgcolor: isSubItemActive ? '#3a3a3a' : '#f0f0f0',
+                            },
+                          }}
+                        >
+                          <ListItemText
+                            primary={subItem.label}
+                            primaryTypographyProps={{
+                              sx: {
+                                fontSize: "15px",
+                                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                              },
+                            }}
+                          />
+                        </ListItemButton>
+                      );
+                    })}
+                  </List>
+                </Collapse>
+              )}
+            </Box>
+          );
+        })}
       </List>
     </Box>
   );
@@ -257,7 +309,7 @@ const Navbar = () => {
             gap: { xs: 2, md: 0 },
           }}
         >
-          {/* Logo - Desktop (using image) */}
+          {/* Logo */}
           <Box>
             <img
               src={logo}
@@ -282,109 +334,118 @@ const Navbar = () => {
               }}
               onMouseLeave={handleMouseLeave}
             >
-              {menuItems.map((item, index) => (
-                <Box key={index}>
-                  {item.submenu ? (
-                    // With submenu
-                    <Button
-                      onMouseEnter={(e) => handleMouseEnter(e, index)}
-                      endIcon={<ExpandMoreIcon />}
-                      sx={{
-                        color: "white",
-                        fontSize: { xs: "13px", md: "14px" },
-                        fontWeight: 600,
-                        padding: { xs: "6px 8px", md: "8px 10px" },
-                        borderRadius: "8px",
-                        textTransform: "none",
-                        whiteSpace: "nowrap",
-                        "&:hover": {
-                          color: "#c6ff00",
-                          background: "transparent",
-                        },
-                      }}
-                    >
-                      {item.label}
-                    </Button>
-                  ) : (
-                    // Without submenu (including PDF)
-                    <Button
-                      component={item.isPdf ? "a" : Link}
-                      to={!item.isPdf ? item.path : undefined}
-                      href={item.isPdf ? item.path : undefined}
-                      target={item.isPdf ? "_blank" : undefined}
-                      rel={item.isPdf ? "noopener noreferrer" : undefined}
-                      sx={{
-                        color: "white",
-                        fontSize: { xs: "13px", md: "14px" },
-                        fontWeight: 600,
-                        padding: { xs: "6px 8px", md: "8px 10px" },
-                        borderRadius: "8px",
-                        textTransform: "none",
-                        whiteSpace: "nowrap",
-                        "&:hover": {
-                          color: "#c6ff00",
-                          background: "transparent",
-                        },
-                      }}
-                    >
-                      {item.label}
-                    </Button>
-                  )}
+              {menuItems.map((item, index) => {
+                const hasActiveSubmenu = isSubmenuActive(item.submenu);
+                const isItemActive = !item.submenu && isActive(item.path, item.isPdf);
+                
+                return (
+                  <Box key={index}>
+                    {item.submenu ? (
+                      // With submenu
+                      <Button
+                        onMouseEnter={(e) => handleMouseEnter(e, index)}
+                        endIcon={<ExpandMoreIcon />}
+                        sx={{
+                          color: isItemActive || hasActiveSubmenu ? '#c6ff00' : 'white',
+                          fontSize: { xs: "13px", md: "14px" },
+                          fontWeight: 600,
+                          padding: { xs: "6px 8px", md: "8px 10px" },
+                          borderRadius: "8px",
+                          textTransform: "none",
+                          whiteSpace: "nowrap",
+                          "&:hover": {
+                            color: "#c6ff00",
+                            background: "transparent",
+                          },
+                        }}
+                      >
+                        {item.label}
+                      </Button>
+                    ) : (
+                      // Without submenu
+                      <Button
+                        component={item.isPdf ? "a" : Link}
+                        to={!item.isPdf ? item.path : undefined}
+                        href={item.isPdf ? item.path : undefined}
+                        target={item.isPdf ? "_blank" : undefined}
+                        rel={item.isPdf ? "noopener noreferrer" : undefined}
+                        sx={{
+                          color: isItemActive ? '#c6ff00' : 'white',
+                          fontSize: { xs: "13px", md: "14px" },
+                          fontWeight: 600,
+                          padding: { xs: "6px 8px", md: "8px 10px" },
+                          borderRadius: "8px",
+                          textTransform: "none",
+                          whiteSpace: "nowrap",
+                          "&:hover": {
+                            color: "#c6ff00",
+                            background: "transparent",
+                          },
+                        }}
+                      >
+                        {item.label}
+                      </Button>
+                    )}
 
-                  {item.submenu && (
-                    <Menu
-                      anchorEl={anchorEl}
-                      open={activeIndex === index}
-                      onClose={handleMouseLeave}
-                      MenuListProps={{
-                        onMouseLeave: handleMouseLeave,
-                      }}
-                      anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
-                      transformOrigin={{ horizontal: "left", vertical: "top" }}
-                      sx={{
-                        "& .MuiPaper-root": {
-                          background: "#3a3a3a",
-                          color: "white",
-                          borderRadius: "4px",
-                          minWidth: "230px",
-                          marginTop: "0px",
-                          boxShadow: "0 6px 20px rgba(0,0,0,0.4)",
-                        },
-                        pointerEvents: "none",
-                        "& .MuiList-root": {
-                          pointerEvents: "auto",
-                        },
-                      }}
-                    >
-                      {item.submenu.map((subItem, i) => (
-                        <MenuItem
-                          key={i}
-                          component={subItem.isPdf ? "a" : Link}
-                          to={!subItem.isPdf ? subItem.path : undefined}
-                          href={subItem.isPdf ? subItem.path : undefined}
-                          target={subItem.isPdf ? "_blank" : undefined}
-                          rel={subItem.isPdf ? "noopener noreferrer" : undefined}
-                          onClick={handleMouseLeave}
-                          sx={{
-                            fontSize: "15px",
-                            padding: "12px 18px",
-                            borderBottom:
-                              i !== item.submenu.length - 1
-                                ? "1px solid rgba(255,255,255,0.15)"
-                                : "none",
-                            "&:hover": {
-                              background: "#3a3a3a",
-                              color: "#c6ff00",
-                            },
-                          }}
-                        >
-                          {subItem.label}
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  )}
-                </Box>
-              ))}
+                    {item.submenu && (
+                      <Menu
+                        anchorEl={anchorEl}
+                        open={activeIndex === index}
+                        onClose={handleMouseLeave}
+                        MenuListProps={{
+                          onMouseLeave: handleMouseLeave,
+                        }}
+                        anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+                        transformOrigin={{ horizontal: "left", vertical: "top" }}
+                        sx={{
+                          "& .MuiPaper-root": {
+                            background: "#3a3a3a",
+                            color: "white",
+                            borderRadius: "0px",
+                            minWidth: "230px",
+                            marginTop: "0px",
+                            boxShadow: "0 6px 20px rgba(0,0,0,0.4)",
+                          },
+                          pointerEvents: "none",
+                          "& .MuiList-root": {
+                            pointerEvents: "auto",
+                          },
+                        }}
+                      >
+                        {item.submenu.map((subItem, i) => {
+                          const isSubItemActive = isActive(subItem.path, subItem.isPdf);
+                          
+                          return (
+                            <MenuItem
+                              key={i}
+                              component={subItem.isPdf ? "a" : Link}
+                              to={!subItem.isPdf ? subItem.path : undefined}
+                              href={subItem.isPdf ? subItem.path : undefined}
+                              target={subItem.isPdf ? "_blank" : undefined}
+                              rel={subItem.isPdf ? "noopener noreferrer" : undefined}
+                              onClick={handleMouseLeave}
+                              sx={{
+                                fontSize: "15px",
+                                padding: "12px 18px",
+                                color: isSubItemActive ? '#c6ff00' : 'white',
+                                borderBottom: i !== item.submenu.length - 1
+                                  ? "1px solid rgba(255,255,255,0.15)"
+                                  : "none",
+                                "&:hover": {
+                                  background: "#3a3a3a",
+                                  color: "#c6ff00",
+                                },
+                              }}
+                            >
+                              {subItem.label}
+                            </MenuItem>
+                          );
+                        })}
+                      </Menu>
+                    )}
+                  </Box>
+                );
+              })}
             </Box>
           )}
 
@@ -395,6 +456,7 @@ const Navbar = () => {
               sx={{
                 bgcolor: "#3a3a3a",
                 color: "white",
+                borderRadius: "5px",
                 "&:hover": {
                   bgcolor: "#4a4a4a",
                 },

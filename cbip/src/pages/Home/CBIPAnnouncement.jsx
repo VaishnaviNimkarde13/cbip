@@ -22,8 +22,8 @@ import expertRegImg from "../../assets/Expertregistration.jpg";
 const ArrowCircleDown = () => (
   <svg
     viewBox="0 0 512 512"
-    width="26"
-    height="26"
+    width="16"
+    height="16"
     fill="white"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -34,8 +34,8 @@ const ArrowCircleDown = () => (
 const ArrowCircleUp = () => (
   <svg
     viewBox="0 0 512 512"
-    width="26"
-    height="26"
+    width="16"
+    height="16"
     fill="white"
     xmlns="http://www.w3.org/2000/svg"
   >

@@ -29,8 +29,10 @@ import nhpc4 from "../../assets/PG4.jpg";
 import nhpc5 from "../../assets/PG5.jpg";
 import nhpc6 from "../../assets/PG6.jpg";
 
-import hydrogen1 from "../../assets/PG7.jpg";
-import hydrogen2 from "../../assets/PG8.jpg";
+import hydrogen1 from "../../assets/PG8.jpg";
+import hydrogen2 from "../../assets/PG7.jpg";
+
+
 import hydrogen3 from "../../assets/PG9.jpg";
 import hydrogen4 from "../../assets/PG10.jpg";
 import hydrogen5 from "../../assets/PG11.jpg";
@@ -39,10 +41,9 @@ import hydrogen6 from "../../assets/PG12.jpg";
 import hpsebl1 from "../../assets/PG13.jpg";
 import hpsebl2 from "../../assets/PG14.jpg";
 import hpsebl3 from "../../assets/PG15.jpg";
-
-import induction1 from "../../assets/PG16.jpg";
-import induction2 from "../../assets/PG17.jpg";
-import induction3 from "../../assets/PG18.jpg";
+import hpsebl4 from "../../assets/PG16.jpg";
+import hpsebl5 from "../../assets/PG17.jpg";
+import hpsebl6 from "../../assets/PG18.jpg";
 
 import dtl1 from "../../assets/PG19.jpg";
 import dtl2 from "../../assets/PG20.jpg";
@@ -50,21 +51,16 @@ import dtl3 from "../../assets/PG21.jpg";
 import dtl4 from "../../assets/PG22.jpg";
 import dtl5 from "../../assets/PG23.jpg";
 import dtl6 from "../../assets/PG24.jpg";
+import dtl7 from "../../assets/PG25.jpg";
+import dtl8 from "../../assets/PG26.jpg";
+import dtl9 from "../../assets/PG27.jpg";
+import dtl10 from "../../assets/PG28.jpg";
+import dtl11 from "../../assets/PG29.jpg";
+import dtl12 from "../../assets/PG30.jpg";
+import dtl13 from "../../assets/PG31.jpg";
+import dtl14 from "../../assets/PG32.jpg";
+import dtl15 from "../../assets/PG33.jpg";
 
-import icold1 from "../../assets/PG25.jpg";
-import icold2 from "../../assets/PG26.jpg";
-import icold3 from "../../assets/PG27.jpg";
-import icold4 from "../../assets/PG28.jpg";
-import icold5 from "../../assets/PG29.jpg";
-import icold6 from "../../assets/PG30.jpg";
-import icold7 from "../../assets/PG31.jpg";
-import icold8 from "../../assets/PG32.jpg";
-import icold9 from "../../assets/PG33.jpg";
-import icold10 from "../../assets/PG34.jpg";
-import icold11 from "../../assets/PG35.jpg";
-import icold12 from "../../assets/PG36.jpg";
-import icold13 from "../../assets/PG37.jpg";
-import icold14 from "../../assets/PG38.jpg";
 
 // ── useInView hook ────────────────────────────────────────────────────────────
 const useInView = (threshold = 0.1) => {
@@ -100,7 +96,7 @@ const galleryGroups = [
   {
     id: "nhpc",
     label: "Photo Gallery",
-    title: "Advanced Management Program for Sr. Executives from NHPC",
+    title: "1st International Conference on Hydrogen Energy",
     images: [
       { src: nhpc1, caption: "Advanced Management Program Session" },
       { src: nhpc2, caption: "Group Photo with NHPC Senior Executives" },
@@ -112,12 +108,21 @@ const galleryGroups = [
   },
   {
     id: "hydrogen",
-    label: "1st International Conference on Hydrogen Energy",
-    title: "2nd International Conference on Hydrogen Energy — 383rd International Conference on Hydrogen Energy",
+    label: "Photo Gallery",
+    title: "Onsite Training Program of Newly Recruited Jr. T/mates and Jr. Helpers of HPSEBL",
     images: [
-      { src: hydrogen1, caption: "Inaugural Session" },
+      // { src: hydrogen1, caption: "Inaugural Session" },
+      { src: hydrogen1, caption: "Keynote Address" },
       { src: hydrogen2, caption: "Keynote Address" },
-      // { src: hydrogen3, caption: "Panel Discussion" },
+     
+    ],
+  },
+  {
+    id: "hydrogen",
+    label: "Photo Gallery",
+    title: "12 Weeks Induction Training Program of Executive Trainees On Renewable Energy Development including Energy Storage System",
+    images: [
+  
       { src: hydrogen4, caption: "Technical Session" },
       { src: hydrogen5, caption: "Delegate Interaction" },
       { src: hydrogen6, caption: "Valedictory Function" },
@@ -126,55 +131,39 @@ const galleryGroups = [
   {
     id: "hpsebl",
     label: "Photo Gallery",
-    title: "Onsite Training Program of Newly Recruited Jr. T/mates and Jr. Helpers of HPSEBL",
+    title: "Promotional Linked Training Programs for the Technical and Non Technical Officials of Delhi Transco Ltd. (DTL)",
     images: [
       { src: hpsebl1, caption: "Group Photos of Trainees headed by Faculty Member, Shri Devendra Kumar, Ex CGM, NFL during Site visit" },
       { src: hpsebl2, caption: "Group Photos of Trainees headed by Faculty Member, Shri C.P. Sharma, Ex Executive Director, UPCL during Site visit" },
       { src: hpsebl3, caption: "Technical Training Session" },
+      { src: hpsebl4, caption: "Shri A.K Dinkar, Secretary CBIP and CBIP Centre of Excellence, Gurgaon welcoming Shri Jatindra Nath Swain (IAS), Ex CMD, SECI" },
+      { src: hpsebl5, caption: "Shri Sanjeev Singh, Director (E), CBIP welcoming Shri C. Kannan, Director (Finance), SECI" },
+      { src: hpsebl6, caption: "View of the participant" },
     ],
   },
+
+
   {
-    id: "induction",
-    label: "12 Weeks Induction Training Program of Executive Trainees On Renewable Energy Development including Energy Storage System",
-    title: "Shri A.K Dinkar, Secretary CBIP and CBIP Centre of Excellence, Gurgaon welcoming Shri Jatindra Nath Swain (IAS), Ex CMD, SECI",
+    id: "icold",
+    label: "Photo Gallery",
+    title: "ICOLD Symposium – Sustainable Development of Dams and River Basin 2020",
     images: [
-      { src: induction1, caption: "Shri A.K Dinkar, Secretary CBIP and CBIP Centre of Excellence, Gurgaon welcoming Shri Jatindra Nath Swain (IAS), Ex CMD, SECI" },
-      { src: induction2, caption: "Shri Sanjeev Singh, Director (E), CBIP welcoming Shri C. Kannan, Director (Finance), SECI" },
-      { src: induction3, caption: "View of the participant" },
-    ],
-  },
-  {
-    id: "dtl",
-    label: "Promotional Linked Training Programs for the Technical and Non Technical Officials of Delhi Transco Ltd. (DTL)",
-    title: "View during Session at CBIP Conference Hall, New Delhi",
-    images: [
-      { src: dtl1, caption: "View during Session at CBIP Conference Hall, New Delhi" },
+        { src: dtl1, caption: "View during Session at CBIP Conference Hall, New Delhi" },
       { src: dtl2, caption: "Group Photo at CBIP Conference Hall" },
       { src: dtl3, caption: "View during Session at CBIP Conference Hall, New Delhi" },
       { src: dtl4, caption: "A view during written test at CBIP Hall No. 1" },
       { src: dtl5, caption: "Group Photo at CBIP Conference Hall" },
       { src: dtl6, caption: "View during Session at CBIP Conference Hall, New Delhi" },
-    ],
-  },
-  {
-    id: "icold",
-    label: "ICOLD Symposium - Sustainable Development of Dams and River Basin 2020",
-    title: "ICOLD Symposium – Sustainable Development of Dams and River Basin 2020",
-    images: [
-      { src: icold1, caption: "Inaugural Ceremony" },
-      { src: icold2, caption: "Technical Session" },
-      { src: icold3, caption: "Delegate Registration" },
-      { src: icold4, caption: "Panel Discussion" },
-      { src: icold5, caption: "Technical Presentation" },
-      { src: icold6, caption: "Group Photo" },
-      { src: icold7, caption: "Exhibition Area" },
-      { src: icold8, caption: "Networking Session" },
-      { src: icold9, caption: "Technical Visit" },
-      { src: icold10, caption: "Cultural Program" },
-      { src: icold11, caption: "Award Ceremony" },
-      { src: icold12, caption: "Valedictory Session" },
-      { src: icold13, caption: "Closing Remarks" },
-      { src: icold14, caption: "Group Photo of Delegates" },
+      { src: dtl7, caption: "Inaugural Ceremony" },
+      { src: dtl8, caption: "Technical Session" },
+      { src: dtl9, caption: "Delegate Registration" },
+      { src: dtl10, caption: "Panel Discussion" },
+      { src: dtl11, caption: "Technical Presentation" },
+      { src: dtl12, caption: "Group Photo" },
+      { src: dtl13, caption: "Exhibition Area" },
+      { src: dtl14, caption: "Networking Session" },
+      { src: dtl15, caption: "Technical Visit" },
+    
     ],
   },
 ];

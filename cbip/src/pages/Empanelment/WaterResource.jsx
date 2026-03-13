@@ -73,11 +73,12 @@ const TabButton = ({ label, active, onClick }) => (
       alignItems: "center",
       justifyContent: "center",
       height: "38px",
-      minWidth: "130px",
-      padding: "0 20px",
-      marginRight: "8px",
+      minWidth: { xs: "100px", sm: "130px" },
+      padding: "0 16px",
+      marginRight: { xs: "4px", sm: "8px" },
+      marginBottom: { xs: "4px", sm: "0" },
       fontWeight: 700,
-      fontSize: "13px",
+      fontSize: { xs: "12px", sm: "13px" },
       borderRadius: "4px",
       cursor: "pointer",
       boxSizing: "border-box",
@@ -88,6 +89,7 @@ const TabButton = ({ label, active, onClick }) => (
       transition: "background 0.15s, color 0.15s",
       outline: "none",
       whiteSpace: "nowrap",
+      flex: { xs: 1, sm: "none" },
     }}
   >
     {label}
@@ -104,7 +106,12 @@ const FieldBox = ({ label, children }) => (
       marginBottom: "16px",
     }}
   >
-    <legend style={{ color: "#1565c0", fontWeight: 600, fontSize: "14px", padding: "0 6px" }}>
+    <legend style={{ 
+      color: "#1565c0", 
+      fontWeight: 600, 
+      fontSize: "14px", 
+      padding: "0 6px" 
+    }}>
       {label}
     </legend>
     {children}
@@ -122,7 +129,7 @@ const Input = ({ placeholder, value, onChange, type = "text", style = {} }) => (
       border: "1px solid #ccc",
       borderRadius: "4px",
       padding: "8px 12px",
-      fontSize: "13px",
+      fontSize: { xs: "14px", sm: "13px" },
       outline: "none",
       width: "100%",
       boxSizing: "border-box",
@@ -142,7 +149,7 @@ const Textarea = ({ placeholder, value, onChange, rows = 3 }) => (
       border: "1px solid #ccc",
       borderRadius: "4px",
       padding: "8px 12px",
-      fontSize: "13px",
+      fontSize: { xs: "14px", sm: "13px" },
       outline: "none",
       width: "100%",
       boxSizing: "border-box",
@@ -260,32 +267,104 @@ const WaterResources = () => {
 
   const currentSubs = activeDisciplineForSub ? subDisciplinesMap[activeDisciplineForSub] || [] : [];
 
+  // Responsive styles
+  const containerStyle = {
+    background: "#f5f5f5",
+    minHeight: "100vh",
+    padding: "16px 0",
+  };
+
+  const innerContainerStyle = {
+    maxWidth: "1200px",
+    margin: "0 auto",
+    padding: "0 16px",
+  };
+
+  const cardStyle = {
+    background: "#fff",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    padding: "0",
+  };
+
+  const headerStyle = {
+    display: "flex",
+    flexDirection: window.innerWidth < 768 ? "column" : "row",
+    justifyContent: "space-between",
+    alignItems: window.innerWidth < 768 ? "center" : "flex-start",
+    padding: window.innerWidth < 768 ? "16px" : "16px 24px",
+    borderBottom: "1px solid #eee",
+    gap: "16px",
+    textAlign: window.innerWidth < 768 ? "center" : "left",
+  };
+
+  const formBodyStyle = {
+    padding: window.innerWidth < 768 ? "16px" : "20px 24px",
+  };
+
+  const gridStyle = {
+    display: "grid",
+    gridTemplateColumns: window.innerWidth < 768 ? "1fr" : "1fr 1fr",
+    gap: "12px",
+  };
+
   return (
-    <div style={{ background: "#f5f5f5", minHeight: "100vh", padding: "16px 0" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }}>
+    <div style={containerStyle}>
+      <div style={innerContainerStyle}>
 
         {/* TAB BUTTONS */}
-        <div style={{ marginBottom: "16px" }}>
+        <div style={{ 
+          display: "flex", 
+          marginBottom: "16px", 
+          flexWrap: "wrap", 
+          gap: "4px",
+          justifyContent: window.innerWidth < 768 ? "center" : "flex-start"
+        }}>
           <TabButton label="Hydro Power"     active={activeTab === "hydro"}  onClick={() => navigate("/empanelment/hydro")} />
           <TabButton label="Water Resources" active={activeTab === "water"}  onClick={() => navigate("/empanelment/water")} />
           <TabButton label="Power Sector"    active={activeTab === "power"}  onClick={() => navigate("/empanelment/power")} />
         </div>
 
         {/* MAIN CARD */}
-        <div style={{ background: "#fff", border: "1px solid #ddd", borderRadius: "4px", padding: "0" }}>
+        <div style={cardStyle}>
 
           {/* HEADER ROW */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", padding: "16px 24px", borderBottom: "1px solid #eee", flexWrap: "wrap", gap: "12px" }}>
-            <img src={logo} alt="CBIP Logo" style={{ width: "80px", height: "80px", objectFit: "contain" }} />
+          <div style={headerStyle}>
+            <img src={logo} alt="CBIP Logo" style={{ 
+              width: window.innerWidth < 768 ? "60px" : "80px", 
+              height: window.innerWidth < 768 ? "60px" : "80px", 
+              objectFit: "contain" 
+            }} />
 
-            <div style={{ textAlign: "center", flex: "1", minWidth: "200px" }}>
-              <div style={{ fontSize: "22px", fontWeight: 800, color: "#000", letterSpacing: "1px" }}>
+            <div style={{ 
+              textAlign: "center", 
+              flex: "1", 
+              minWidth: window.innerWidth < 768 ? "100%" : "200px" 
+            }}>
+              <div style={{ 
+                fontSize: window.innerWidth < 768 ? "18px" : "22px", 
+                fontWeight: 800, 
+                color: "#000", 
+                letterSpacing: "1px",
+                lineHeight: 1.3
+              }}>
                 CENTRAL BOARD OF IRRIGATION AND POWER
               </div>
-              <div style={{ fontSize: "14px", color: "#444" }}>An ISO 9001 - 2015 Organisation</div>
+              <div style={{ 
+                fontSize: window.innerWidth < 768 ? "12px" : "14px", 
+                color: "#444",
+                marginTop: "4px"
+              }}>
+                An ISO 9001 - 2015 Organisation
+              </div>
             </div>
 
-            <div style={{ textAlign: "center", fontSize: "13px", lineHeight: "1.6" }}>
+            <div style={{ 
+              textAlign: window.innerWidth < 768 ? "center" : "center", 
+              fontSize: window.innerWidth < 768 ? "12px" : "13px", 
+              lineHeight: "1.6",
+              minWidth: window.innerWidth < 768 ? "100%" : "200px"
+            }}>
               <strong>Central Board of</strong><br />
               <strong>Irrigation &amp; Power</strong><br />
               Malcha Marg, Chanakyapuri,<br />
@@ -295,29 +374,55 @@ const WaterResources = () => {
               E-mail: <a href="mailto:cbip@cbip.org" style={{ color: "#1565c0" }}>cbip@cbip.org</a><br />
               Website: <a href="https://www.cbip.org" style={{ color: "#1565c0" }}>www.cbip.org</a>
             </div>
+          </div>
 
-            <div style={{ fontSize: "13px", minWidth: "180px" }}>
-              <div style={{ fontWeight: 700, marginBottom: "6px" }}>Upload Passport Image</div>
-              <input type="file" accept="image/*" onChange={(e) => setPassportFile(e.target.files[0])} style={{ fontSize: "12px" }} />
-              <div style={{ fontWeight: 700, margin: "10px 0 6px" }}>Upload Resume</div>
-              <input type="file" accept=".pdf,.doc,.docx" onChange={(e) => setResumeFile(e.target.files[0])} style={{ fontSize: "12px" }} />
-              <div style={{ fontSize: "11px", color: "#555", marginTop: "6px" }}>
-                Passport Size Photograph must be maximum 20 kb
+          {/* Upload Section - Separate for mobile */}
+          <div style={{ 
+            padding: window.innerWidth < 768 ? "0 16px 16px" : "0 24px 16px",
+            borderBottom: "1px solid #eee"
+          }}>
+            <div style={{ 
+              display: "flex",
+              flexDirection: window.innerWidth < 768 ? "column" : "row",
+              gap: "16px",
+              justifyContent: "space-between",
+              alignItems: window.innerWidth < 768 ? "stretch" : "center",
+              background: "#f8f9fa",
+              padding: "16px",
+              borderRadius: "4px"
+            }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 700, marginBottom: "6px", fontSize: "13px" }}>Upload Passport Image</div>
+                <input type="file" accept="image/*" onChange={(e) => setPassportFile(e.target.files[0])} style={{ fontSize: "12px", width: "100%" }} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 700, marginBottom: "6px", fontSize: "13px" }}>Upload Resume</div>
+                <input type="file" accept=".pdf,.doc,.docx" onChange={(e) => setResumeFile(e.target.files[0])} style={{ fontSize: "12px", width: "100%" }} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: "11px", color: "#555" }}>
+                  Passport Size Photograph must be maximum 20 kb
+                </div>
               </div>
             </div>
           </div>
 
           {/* FORM BODY */}
-          <div style={{ padding: "20px 24px" }}>
+          <div style={formBodyStyle}>
 
             {/* Registration Title */}
-            <div style={{ color: "#c0392b", fontWeight: 700, fontSize: "16px", marginBottom: "16px" }}>
+            <div style={{ 
+              color: "#c0392b", 
+              fontWeight: 700, 
+              fontSize: window.innerWidth < 768 ? "14px" : "16px", 
+              marginBottom: "16px" 
+            }}>
               {tabTitles[activeTab]}
             </div>
 
             {/* PERSONAL INFORMATION */}
             <FieldBox label="Personal Information">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <div style={gridStyle}>
                 <Input placeholder="Name of the Expert/Specialist *" value={name} onChange={(e) => setName(e.target.value)} />
                 <Input placeholder="Address *" value={address} onChange={(e) => setAddress(e.target.value)} />
                 <Input placeholder="E-Mail ID *" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -327,11 +432,11 @@ const WaterResources = () => {
 
             {/* PROFESSIONAL INFORMATION */}
             <FieldBox label="Professional Information">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <div style={gridStyle}>
                 <Input placeholder="Organization/Designation *" value={orgDesignation} onChange={(e) => setOrgDesignation(e.target.value)} />
                 <div>
                   <Textarea placeholder="Brief Professional Profile *" value={briefProfile} onChange={(e) => setBriefProfile(e.target.value)} rows={3} />
-                  <div style={{ fontSize: "11px", color: "#666", textAlign: "right" }}>{wordCount}/200 words Max. 200 words</div>
+                  <div style={{ fontSize: "11px", color: "#666", textAlign: "right", marginTop: "4px" }}>{wordCount}/200 words Max. 200 words</div>
                 </div>
               </div>
             </FieldBox>
@@ -343,18 +448,29 @@ const WaterResources = () => {
                 Main Disciplines (Max 3 selections) with Sub-Disciplines (Max 5 selections)
               </div>
 
-              <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+              <div style={{ 
+                display: "flex", 
+                flexDirection: window.innerWidth < 768 ? "column" : "row",
+                gap: "24px" 
+              }}>
                 {/* Main Disciplines */}
-                <div style={{ flex: "1", minWidth: "300px" }}>
+                <div style={{ flex: "1", minWidth: window.innerWidth < 768 ? "100%" : "300px" }}>
                   <div style={{ fontWeight: 700, fontSize: "13px", marginBottom: "10px" }}>Main Disciplines</div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 24px" }}>
+                  <div style={{ 
+                    display: "grid", 
+                    gridTemplateColumns: window.innerWidth < 768 ? "1fr" : "1fr 1fr", 
+                    gap: "8px 24px",
+                    maxHeight: window.innerWidth < 768 ? "300px" : "400px",
+                    overflowY: "auto",
+                    paddingRight: "8px"
+                  }}>
                     {mainDisciplines.map((disc) => (
                       <label key={disc} style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", cursor: "pointer" }}>
                         <input
                           type="checkbox"
                           checked={selectedMains.includes(disc)}
                           onChange={() => handleMainDisciplineClick(disc)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer", width: "16px", height: "16px" }}
                         />
                         {disc}
                       </label>
@@ -363,15 +479,30 @@ const WaterResources = () => {
                 </div>
 
                 {/* Sub-Disciplines */}
-                <div style={{ flex: "1", minWidth: "260px" }}>
+                <div style={{ flex: "1", minWidth: window.innerWidth < 768 ? "100%" : "260px" }}>
                   <div style={{ fontWeight: 700, fontSize: "13px", marginBottom: "10px" }}>Sub-Disciplines</div>
-                  <div style={{ border: "1px solid #ccc", borderRadius: "4px", minHeight: "180px", padding: "10px", fontSize: "13px", color: currentSubs.length === 0 ? "#999" : "#333", background: "#fafafa" }}>
+                  <div style={{ 
+                    border: "1px solid #ccc", 
+                    borderRadius: "4px", 
+                    minHeight: window.innerWidth < 768 ? "150px" : "180px", 
+                    maxHeight: window.innerWidth < 768 ? "200px" : "300px",
+                    overflowY: "auto",
+                    padding: "10px", 
+                    fontSize: "13px", 
+                    color: currentSubs.length === 0 ? "#999" : "#333", 
+                    background: "#fafafa" 
+                  }}>
                     {currentSubs.length === 0 ? (
                       <span>Select a Main Discipline to view Sub-Disciplines.</span>
                     ) : (
                       currentSubs.map((sub) => (
                         <label key={sub} style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "6px", cursor: "pointer" }}>
-                          <input type="checkbox" checked={pendingSubDisciplines.includes(sub)} onChange={() => handleSubDisciplineClick(sub)} />
+                          <input 
+                            type="checkbox" 
+                            checked={pendingSubDisciplines.includes(sub)} 
+                            onChange={() => handleSubDisciplineClick(sub)}
+                            style={{ width: "16px", height: "16px" }}
+                          />
                           {sub}
                         </label>
                       ))
@@ -380,17 +511,43 @@ const WaterResources = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: "12px" }}>
-                <span style={{ fontSize: "13px", color: "#1565c0", marginRight: "12px" }}>Click One by One &amp; Press OK</span>
+              <div style={{ 
+                marginTop: "12px",
+                display: "flex",
+                flexDirection: window.innerWidth < 768 ? "column" : "row",
+                alignItems: window.innerWidth < 768 ? "stretch" : "center",
+                gap: "12px"
+              }}>
+                <span style={{ fontSize: "13px", color: "#1565c0" }}>Click One by One &amp; Press OK</span>
                 <button
                   onClick={handleOK}
-                  style={{ background: "#1976d2", color: "#fff", border: "none", borderRadius: "4px", padding: "6px 18px", fontWeight: 700, fontSize: "13px", cursor: "pointer" }}
+                  style={{ 
+                    background: "#1976d2", 
+                    color: "#fff", 
+                    border: "none", 
+                    borderRadius: "4px", 
+                    padding: "8px 18px", 
+                    fontWeight: 700, 
+                    fontSize: "13px", 
+                    cursor: "pointer",
+                    width: window.innerWidth < 768 ? "100%" : "auto"
+                  }}
                 >
                   OK
                 </button>
               </div>
 
-              <div style={{ border: "1px solid #ccc", borderRadius: "4px", minHeight: "100px", padding: "10px", marginTop: "12px", fontSize: "13px", background: "#fafafa" }}>
+              <div style={{ 
+                border: "1px solid #ccc", 
+                borderRadius: "4px", 
+                minHeight: "100px", 
+                maxHeight: "200px",
+                overflowY: "auto",
+                padding: "10px", 
+                marginTop: "12px", 
+                fontSize: "13px", 
+                background: "#fafafa" 
+              }}>
                 {confirmedSelections.length === 0 ? (
                   <span style={{ color: "#999" }}>No selections confirmed yet.</span>
                 ) : (
@@ -405,7 +562,7 @@ const WaterResources = () => {
 
             {/* EXPERIENCE AND AFFILIATIONS */}
             <FieldBox label="Experience and Affiliations">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <div style={gridStyle}>
                 <Input placeholder="Years of Experience *" value={yearsExp} onChange={(e) => setYearsExp(e.target.value)} />
                 <Textarea placeholder="Affiliations/Certifications" value={affiliations} onChange={(e) => setAffiliations(e.target.value)} rows={2} />
               </div>
@@ -419,10 +576,19 @@ const WaterResources = () => {
             {/* PREFERRED ROLES */}
             <FieldBox label="Preferred Roles">
               <div style={{ fontWeight: 700, fontSize: "13px", marginBottom: "10px" }}>*Preferred Roles (Please Tick)</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 40px" }}>
+              <div style={{ 
+                display: "grid", 
+                gridTemplateColumns: window.innerWidth < 768 ? "1fr" : "1fr 1fr", 
+                gap: "10px 40px" 
+              }}>
                 {preferredRolesOptions.map((role) => (
                   <label key={role} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", cursor: "pointer" }}>
-                    <input type="checkbox" checked={!!preferredRoles[role]} onChange={() => handlePreferredRoleToggle(role)} style={{ width: "16px", height: "16px", cursor: "pointer" }} />
+                    <input 
+                      type="checkbox" 
+                      checked={!!preferredRoles[role]} 
+                      onChange={() => handlePreferredRoleToggle(role)} 
+                      style={{ width: "16px", height: "16px", cursor: "pointer" }} 
+                    />
                     {role}
                   </label>
                 ))}
@@ -438,7 +604,18 @@ const WaterResources = () => {
             <div style={{ textAlign: "center", paddingTop: "8px", paddingBottom: "16px" }}>
               <button
                 onClick={handleSubmit}
-                style={{ background: "#1976d2", color: "#fff", border: "none", borderRadius: "4px", padding: "10px 40px", fontWeight: 700, fontSize: "14px", cursor: "pointer", letterSpacing: "1px" }}
+                style={{ 
+                  background: "#1976d2", 
+                  color: "#fff", 
+                  border: "none", 
+                  borderRadius: "4px", 
+                  padding: window.innerWidth < 768 ? "12px 20px" : "10px 40px", 
+                  fontWeight: 700, 
+                  fontSize: window.innerWidth < 768 ? "16px" : "14px", 
+                  cursor: "pointer", 
+                  letterSpacing: "1px",
+                  width: window.innerWidth < 768 ? "100%" : "auto"
+                }}
               >
                 SUBMIT
               </button>
