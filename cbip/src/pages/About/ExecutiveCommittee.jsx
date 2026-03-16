@@ -312,7 +312,7 @@ const MemberCard = ({ index, name }) => (
 
 <Box
   sx={{
-    height: "100%",
+    // height: "100%",
     bgcolor: T.cardBg,
     border: `1px solid ${T.border}`,
     borderRadius: "12px",
@@ -419,7 +419,6 @@ const colConfig = { xs: 12, sm: 6, md: 4 };
       md: "1fr 1fr 1fr",
     },
     gridAutoRows: "1fr",
-
     gap: 2,
    
   }}
