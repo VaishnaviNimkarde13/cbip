@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import HomeMain from "./pages/Home/HomeMain";
 import History from "./pages/About/History";
 import Activities from "./pages/About/Activities";
+import ExecutiveCommittee from "./pages/About/ExecutiveCommittee";
 import OfficeBearers from "./pages/About/OfficeBearers";
 
 import HydroResource from "./pages/Empanelment/HydroResource";
@@ -37,6 +38,8 @@ return ( <BrowserRouter> <Header /> <Navbar />
     {/* About Routes */}
     <Route path="/history" element={<History />} />
     <Route path="/activities" element={<Activities />} />
+    <Route path="/executive-committee" element={<ExecutiveCommittee />} />
+
     <Route path="/office-bearers" element={<OfficeBearers />} />
 
     {/* Membership Routes */}

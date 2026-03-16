@@ -105,8 +105,8 @@ const Navbar = () => {
         { label: "Activities", path: "/activities" },
         { 
           label: "Executive Committee", 
-          path: pdf,
-          isPdf: true
+          path: "/executive-committee",
+        
         },
         { label: "Office Bearers", path: "/office-bearers" },
       ],

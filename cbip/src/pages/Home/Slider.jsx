@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Container, Typography, useTheme, useMediaQuery } from "@mui/material";
 
+// Import your downloaded video
+import videoFile from "../../assets/Cbip_V01 (1).mp4";
+
 const Slider = () => {
   const videoRef = useRef(null);
   const theme = useTheme();
@@ -31,7 +34,7 @@ const Slider = () => {
       <Box
         component="video"
         ref={videoRef}
-        src="https://files.cbip.org/video6.mp4"
+        src={videoFile}
         autoPlay
         muted
         loop
@@ -46,11 +49,6 @@ const Slider = () => {
           pointerEvents: "none",
         }}
       />
-
-      {/* Gradient Overlay */}
-     
-
-    
     </Box>
   );
 };
