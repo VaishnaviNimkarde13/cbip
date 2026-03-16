@@ -31,7 +31,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
 return ( <BrowserRouter> <Header /> <Navbar />
 
-```
+
   <Routes>
     <Route path="/" element={<HomeMain />} />
 
